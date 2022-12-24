@@ -2,6 +2,9 @@ package service;
 
 import model.Zone;
 
-public interface ZoneService {
+import java.util.ArrayList;
+import java.util.List;
 
+
+public interface ZoneService {
 }
