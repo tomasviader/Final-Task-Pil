@@ -1,17 +1,14 @@
 package model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.Locale;
-
+import lombok.*;
 @Entity
 @Table(name = "\"Zone\"")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+
+
 public class Zone {
 
     @Id
@@ -31,6 +28,7 @@ public class Zone {
 
     @Column(nullable = false)
     private String coordinates;
+
 
 
     //clasificacion falta saber como vamos a implentar (enum, etc)
