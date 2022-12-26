@@ -12,7 +12,10 @@ import service.ZoneService;
 @RequestMapping("/zones")
 @RequiredArgsConstructor
 public class ZoneController {
-
     @Autowired
     ZoneService zoneService;
+    @PostMapping
+    public Zone saveZone(Zone zone){
+        return zoneService.saveZone(zone);
+    }
 }
