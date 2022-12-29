@@ -1,14 +1,16 @@
-package service;
+package com.example.FinalPil.service;
 
-import model.Zone;
+import lombok.AllArgsConstructor;
+import com.example.FinalPil.model.Zone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.ZoneRepository;
+import com.example.FinalPil.repository.ZoneRepository;
 
 import java.util.Objects;
 
 @Service
-class ZoneServiceImpl implements ZoneService {
+@AllArgsConstructor
+public class ZoneServiceImpl implements ZoneService {
     @Autowired
     ZoneRepository zoneRepository;
 
