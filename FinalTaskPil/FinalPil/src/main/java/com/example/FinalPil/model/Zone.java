@@ -1,4 +1,4 @@
-package model;
+package com.example.FinalPil.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,14 +7,12 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-
+@Builder
 public class Zone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(unique = true, nullable = false)
     private Long id;
 
     @Column(nullable = false)
