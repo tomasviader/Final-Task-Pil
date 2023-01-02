@@ -31,15 +31,8 @@ class ZoneControllerTest {
     @Autowired
     ObjectMapper mapper;
 
-    @Mock
-    private ObjectWriter objectWriter;
-
     @MockBean
     ZoneService zoneService;
-
-    Zone zone_1 = new Zone(1L, "Almafuerte", "Islas Malvinas", 280, "20");
-    Zone zone_2 = new Zone(2L, "Cordoba", "Rondeau", 395, "30");
-    Zone zone_3 = new Zone(3L, "Almafuerte", "Salta", 190, "50");
 
     @Test
     void ANewZoneShouldBeCreated() throws Exception {
