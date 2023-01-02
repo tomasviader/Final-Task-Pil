@@ -36,18 +36,13 @@ class ZoneControllerTest {
     @Autowired
     ObjectMapper mapper;
 
-    @Mock
-    private ObjectWriter objectWriter;
-
     @MockBean
     ZoneService zoneService;
-
-    @MockBean
+    
+     @MockBean
     ZoneRepository zoneRepository;
-
-
-
-
+    
+    
     @Test
     void ANewZoneShouldBeCreated() throws Exception {
         Zone zone = Zone.builder()
