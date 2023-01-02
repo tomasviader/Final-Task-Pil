@@ -17,8 +17,13 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
+import java.util.Optional;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.http.RequestEntity.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,7 +38,11 @@ class ZoneControllerTest {
 
     @MockBean
     ZoneService zoneService;
-
+    
+     @MockBean
+    ZoneRepository zoneRepository;
+    
+    
     @Test
     void ANewZoneShouldBeCreated() throws Exception {
         Zone zone = Zone.builder()
@@ -42,7 +51,7 @@ class ZoneControllerTest {
                 .number(200)
                 .coordinates("40").build();
 
-        Mockito.when(zoneService.saveZone(zone)).thenReturn(zone);
+        when(zoneService.saveZone(zone)).thenReturn(zone);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/zones")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -54,5 +63,34 @@ class ZoneControllerTest {
                 .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.name", is("Cba")));
     }
+
+    @Test
+    void aZoneShouldBeModified() throws Exception {
+
+        Zone zone_3 = new Zone(3L, "Almafuerte", "Salta", 190, "50");
+
+        Zone updatedZone = Zone.builder()
+                .id(zone_3.getId())
+                .name("Cba")
+                .street("Jujuy")
+                .number(200)
+                .coordinates("40").build();
+
+        Mockito.when(zoneRepository.findById(zone_3.getId())).thenReturn(Optional.of(zone_3));
+        Mockito.when(zoneService.saveZone(updatedZone)).thenReturn(updatedZone);
+
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/zones")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(this.mapper.writeValueAsString(updatedZone));
+
+        this.mockMvc.perform(mockRequest)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("Cba")))
+                .andExpect(jsonPath("$.street", is("Jujuy")));
+
+    }
+
+
 
 }
