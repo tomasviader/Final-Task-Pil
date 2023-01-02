@@ -6,5 +6,6 @@ public interface ZoneService {
 
     Zone saveZone(Zone zone);
 
+    Zone modifyZone(Long id, Zone zone);
 
 }

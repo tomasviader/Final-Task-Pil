@@ -21,8 +21,8 @@ public class ZoneServiceImpl implements ZoneService {
 
 
     @Override
-    public Zone modifyZone(Long zoneId, Zone zone) {
-        Zone zoneDB = zoneRepository.findById(zoneId).get();
+    public Zone modifyZone(Long id, Zone zone) {
+        Zone zoneDB = zoneRepository.findById(id).get();
 
         if (Objects.nonNull(zone.getName())) {
             zoneDB.setName(zone.getName());
