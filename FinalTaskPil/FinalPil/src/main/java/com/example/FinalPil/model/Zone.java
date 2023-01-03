@@ -28,7 +28,7 @@ public class Zone {
     private String coordinates;
 
     //Clasificacion falta saber como vamos a implentar (enum, etc)
-    @Column(nullable = false)
-    private WasteSorting wasteSorting;
+    /*@Column(nullable = false)
+    private WasteSorting wasteSorting;*/
 
 }
