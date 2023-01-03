@@ -20,6 +20,28 @@ public class ZoneServiceImpl implements ZoneService {
     }
 
     @Override
+
+    public Zone modifyZone(Long id, Zone zone) {
+        Zone zoneDB = zoneRepository.findById(id).get();
+
+        if (Objects.nonNull(zone.getName())) {
+            zoneDB.setName(zone.getName());
+        }
+
+        if (Objects.nonNull(zone.getStreet())) {
+            zoneDB.setStreet(zone.getStreet());
+            zoneDB.setNumber(zone.getNumber());
+        }
+
+        if (Objects.nonNull(zone.getCoordinates())) {
+            zoneDB.setCoordinates(zone.getCoordinates());
+        }
+
+        return zoneRepository.save(zoneDB);
+    }
+}
+
+
     public Zone updateZoneStatus(Long zoneId, Zone zone) {
         Zone zoneDB = zoneRepository.findById(zoneId).get();
 
@@ -29,3 +51,4 @@ public class ZoneServiceImpl implements ZoneService {
         return zoneRepository.save(zoneDB);
     }
 }
+
