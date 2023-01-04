@@ -30,12 +30,7 @@ public class ZoneController {
     }
 
     @PutMapping("/{id}")
-    public Zone modifyZone(@PathVariable Long id, @RequestBody Zone zone){
+    public Zone modifyZone(@PathVariable Long id, @RequestBody Zone zone) {
         return zoneService.modifyZone(id, zone);
-
-    @PutMapping("/zone_status/{id}")
-    public Zone updateZoneStatus(@PathVariable("id") Long zoneId,@RequestBody Zone zone){
-        return zoneService.updateZoneStatus(zoneId,zone);
-
     }
 }
