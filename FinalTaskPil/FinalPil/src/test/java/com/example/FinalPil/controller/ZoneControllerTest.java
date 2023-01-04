@@ -80,9 +80,9 @@ class ZoneControllerTest {
                 .status(false).build();
 
         Mockito.when(zoneRepository.findById(zone_3.getId())).thenReturn(Optional.of(zone_3));
-        Mockito.when(zoneService.saveZone(updatedZone)).thenReturn(updatedZone);
+        Mockito.when(zoneService.modifyZone(updatedZone.getId(),updatedZone)).thenReturn(updatedZone);
 
-        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/zones")
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/zones/"+ updatedZone.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(this.mapper.writeValueAsString(updatedZone));
