@@ -32,10 +32,11 @@ public class ZoneController {
     @PutMapping("/{id}")
     public Zone modifyZone(@PathVariable Long id, @RequestBody Zone zone){
         return zoneService.modifyZone(id, zone);
+    }
 
-    @PutMapping("/zone_status/{id}")
-    public Zone updateZoneStatus(@PathVariable("id") Long zoneId,@RequestBody Zone zone){
-        return zoneService.updateZoneStatus(zoneId,zone);
-
+    @DeleteMapping("/{id}")
+    public String deleteZone(@PathVariable Long id){
+        zoneService.deleteZone(id);
+        return "Zone deleted succefully.";
     }
 }

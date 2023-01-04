@@ -50,7 +50,8 @@ class ZoneControllerTest {
                 .name("Cba")
                 .street("Salta")
                 .number(200)
-                .coordinates("40").build();
+                .coordinates("40")
+                .status(true).build();
 
         when(zoneService.saveZone(zone)).thenReturn(zone);
 
@@ -68,14 +69,15 @@ class ZoneControllerTest {
     @Test
     void aZoneShouldBeModified() throws Exception {
 
-        Zone zone_3 = new Zone(3L, "Almafuerte", "Salta", 190, "50");
+        Zone zone_3 = new Zone(3L, "Almafuerte", "Salta", 190, "50",true);
 
         Zone updatedZone = Zone.builder()
                 .id(zone_3.getId())
                 .name("Cba")
                 .street("Jujuy")
                 .number(200)
-                .coordinates("40").build();
+                .coordinates("40")
+                .status(false).build();
 
         Mockito.when(zoneRepository.findById(zone_3.getId())).thenReturn(Optional.of(zone_3));
         Mockito.when(zoneService.modifyZone(updatedZone.getId(),updatedZone)).thenReturn(updatedZone);
@@ -89,6 +91,19 @@ class ZoneControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("Cba")))
                 .andExpect(jsonPath("$.street", is("Jujuy")));
+
+    }
+
+    @Test
+    void aZoneShouldBeDeleted()throws Exception{
+        Zone zone1 = new Zone(3L, "Almafuerte", "Salta", 190, "50",true);
+
+        Mockito.when(zoneRepository.findById(zone1.getId())).thenReturn(Optional.of(zone1));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/zones/3")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
     }
 

@@ -10,6 +10,5 @@ public interface ZoneService {
     Zone modifyZone(Long id, Zone zone);
 
 
-    Zone updateZoneStatus(Long zoneId, Zone zone);
-
+    void deleteZone(Long id);
 }
