@@ -69,7 +69,9 @@ class ZoneControllerTest {
     @Test
     void aZoneShouldBeModified() throws Exception {
 
-        Zone zone_3 = new Zone(3L, "Almafuerte", "Salta", 190, "50", true);
+
+        Zone zone_3 = new Zone(3L, "Almafuerte", "Salta", 190, "50",true);
+
 
         Zone updatedZone = Zone.builder()
                 .id(zone_3.getId())
@@ -91,6 +93,19 @@ class ZoneControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("Cba")))
                 .andExpect(jsonPath("$.street", is("Jujuy")));
+
+    }
+
+    @Test
+    void aZoneShouldBeDeleted()throws Exception{
+        Zone zone1 = new Zone(3L, "Almafuerte", "Salta", 190, "50",true);
+
+        Mockito.when(zoneRepository.findById(zone1.getId())).thenReturn(Optional.of(zone1));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/zones/3")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
     }
 

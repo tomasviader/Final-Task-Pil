@@ -8,4 +8,8 @@ public interface ZoneService {
 
 
     Zone modifyZone(Long id, Zone zone);
+    
+
+    void deleteZone(Long id);
+
 }
