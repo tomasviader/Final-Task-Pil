@@ -69,7 +69,9 @@ class ZoneControllerTest {
     @Test
     void aZoneShouldBeModified() throws Exception {
 
+
         Zone zone_3 = new Zone(3L, "Almafuerte", "Salta", 190, "50",true);
+
 
         Zone updatedZone = Zone.builder()
                 .id(zone_3.getId())

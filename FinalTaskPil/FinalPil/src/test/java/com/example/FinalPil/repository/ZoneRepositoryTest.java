@@ -17,8 +17,10 @@ class ZoneRepositoryTest {
     ZoneRepository zoneRepository;
 
     @Test
-    void ANewTestShouldBeCreated() {
-        Zone zone = new Zone(1L, "Almafuerte", "Islas Malvinas", 700, "20", true);
+
+    void ANewTestShouldBeCreated(){
+        Zone zone = new Zone(1L, "Almafuerte", "Islas Malvinas", 700, "20",true);
+
 
         Zone savedZone = zoneRepository.save(zone);
 
@@ -32,6 +34,7 @@ class ZoneRepositoryTest {
 
         String newName = "Cordoba";
         Zone zone1 = new Zone(1L, newName, "Islas Malvinas", 700, "20", true);
+
         zone1.setId(1L);
         zoneRepository.save(zone1);
 

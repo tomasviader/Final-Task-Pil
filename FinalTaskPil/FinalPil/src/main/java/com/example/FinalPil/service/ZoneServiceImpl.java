@@ -44,11 +44,11 @@ public class ZoneServiceImpl implements ZoneService {
         return zoneRepository.save(zoneDB);
     }
 
+
     @Override
     public void deleteZone(Long id) {
         zoneRepository.deleteById(id);
     }
 
 }
-
 
