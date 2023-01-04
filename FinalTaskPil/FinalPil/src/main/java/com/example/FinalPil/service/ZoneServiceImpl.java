@@ -37,18 +37,10 @@ public class ZoneServiceImpl implements ZoneService {
             zoneDB.setCoordinates(zone.getCoordinates());
         }
 
-        return zoneRepository.save(zoneDB);
-    }
-}
-
-
-    public Zone updateZoneStatus(Long zoneId, Zone zone) {
-        Zone zoneDB = zoneRepository.findById(zoneId).get();
-
         if (Objects.nonNull(zone.isStatus())){
             zoneDB.setStatus(zone.isStatus());
         }
+
         return zoneRepository.save(zoneDB);
     }
 }
-

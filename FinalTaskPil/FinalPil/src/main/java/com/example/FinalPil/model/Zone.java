@@ -31,12 +31,11 @@ public class Zone {
 
 
     //Clasificacion falta saber como vamos a implentar (enum, etc)
-    @Column(nullable = false)
-    private WasteSorting wasteSorting;
+    //@Column(nullable = false)
+    //private WasteSorting wasteSorting;
 
     @Column(nullable = false)
     private boolean status;
-
 
 
     //clasificacion falta saber como vamos a implentar (enum, etc)
