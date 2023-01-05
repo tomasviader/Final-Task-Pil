@@ -11,8 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface ZoneRepository extends JpaRepository<Zone, Long> {
 
-    public Zone findByName(String name);
+    Zone findByName(String name);
 
-    public Zone findByNeighborhood(String neighborhood);
+
+    Zone findByNeighborhood(String neighborhood);
 
 }

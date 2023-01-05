@@ -83,7 +83,8 @@ class ZoneControllerTest {
                 .number(200)
                 .coordinates("40")
                 .neighborhood("Centro")
-                .status(false).build();
+                .status(false)
+                .build();
 
         Mockito.when(zoneRepository.findById(zone_3.getId())).thenReturn(Optional.of(zone_3));
         Mockito.when(zoneService.modifyZone(updatedZone.getId(),updatedZone)).thenReturn(updatedZone);
@@ -127,6 +128,29 @@ class ZoneControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[1].name", is("Almafuerte")));
+    }
+
+    @Test
+    public void getPatientById_success() throws Exception {
+        Zone zone1 = Zone.builder()
+                .id(4L)
+                .name("Cba")
+                .street("Jujuy")
+                .number(200)
+                .coordinates("40")
+                .neighborhood("Centro")
+                .status(false)
+                .build();
+
+
+        Mockito.when(zoneService.getZoneById(zone1.getId())).thenReturn(zone1);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/zones/" + zone1.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.name", is("Cba")));
     }
 
 }

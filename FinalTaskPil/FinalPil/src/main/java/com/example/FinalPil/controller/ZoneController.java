@@ -1,6 +1,7 @@
 package com.example.FinalPil.controller;
 
 
+import com.example.FinalPil.repository.ZoneRepository;
 import jakarta.websocket.server.PathParam;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,8 @@ import java.util.List;
 public class ZoneController {
     @Autowired
     ZoneService zoneService;
-    
+    private final ZoneRepository zoneRepository;
+
     @PostMapping
     public Zone saveZone(@RequestBody Zone zone){
         return zoneService.saveZone(zone);
@@ -54,8 +56,8 @@ public class ZoneController {
         return zoneService.getZoneById(id);
     }
 
-    @GetMapping("/{neighborhood}")
+   /* @GetMapping("/{neighborhood}")
     public Zone getZoneByNeighborhood(@PathVariable String neighborhood){
         return zoneService.getZoneByNeighborhood(neighborhood);
-    }
+    }*/
 }
