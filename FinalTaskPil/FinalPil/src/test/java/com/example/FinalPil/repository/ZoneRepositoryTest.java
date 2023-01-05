@@ -18,7 +18,7 @@ class ZoneRepositoryTest {
 
     @Test
 
-    void ANewTestShouldBeCreated(){
+    void aNewTestShouldBeCreated(){
         Zone zone = new Zone(1L, "Almafuerte", "Islas Malvinas", 700, "20",true);
 
 
