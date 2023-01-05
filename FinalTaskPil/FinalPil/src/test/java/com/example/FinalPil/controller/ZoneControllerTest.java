@@ -131,7 +131,7 @@ class ZoneControllerTest {
     }
 
     @Test
-    public void getPatientById_success() throws Exception {
+    public void weShouldGetAZoneById() throws Exception {
         Zone zone1 = Zone.builder()
                 .id(4L)
                 .name("Cba")
