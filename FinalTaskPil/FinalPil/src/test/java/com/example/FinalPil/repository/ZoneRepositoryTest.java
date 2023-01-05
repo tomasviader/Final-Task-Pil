@@ -22,7 +22,7 @@ class ZoneRepositoryTest {
 
 
     @Test
-    void ANewTestShouldBeCreated(){
+    void aNewTestShouldBeCreated(){
 
 
         Zone savedZone = zoneRepository.save(zone1);
