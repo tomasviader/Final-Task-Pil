@@ -47,7 +47,7 @@ class ZoneControllerTest {
     
     
     @Test
-    void ANewZoneShouldBeCreated() throws Exception {
+    void aNewZoneShouldBeCreated() throws Exception {
         Zone zone = Zone.builder()
                 .name("Cba")
                 .street("Salta")
