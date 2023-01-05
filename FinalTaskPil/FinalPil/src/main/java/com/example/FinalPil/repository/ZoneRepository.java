@@ -13,4 +13,6 @@ public interface ZoneRepository extends JpaRepository<Zone, Long> {
 
     public Zone findByName(String name);
 
+    public Zone findByNeighborhood(String neighborhood);
+
 }

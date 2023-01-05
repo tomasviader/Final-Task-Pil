@@ -18,10 +18,12 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.RequestEntity.put;
@@ -51,6 +53,7 @@ class ZoneControllerTest {
                 .street("Salta")
                 .number(200)
                 .coordinates("40")
+                .neighborhood("Centro")
                 .status(true).build();
 
         when(zoneService.saveZone(zone)).thenReturn(zone);
@@ -70,7 +73,7 @@ class ZoneControllerTest {
     void aZoneShouldBeModified() throws Exception {
 
 
-        Zone zone_3 = new Zone(3L, "Almafuerte", "Salta", 190, "50",true);
+        Zone zone_3 = new Zone(1L, "Cordoba", "Sinsacate", 190, "50", "General Paz", true);
 
 
         Zone updatedZone = Zone.builder()
@@ -79,6 +82,7 @@ class ZoneControllerTest {
                 .street("Jujuy")
                 .number(200)
                 .coordinates("40")
+                .neighborhood("Centro")
                 .status(false).build();
 
         Mockito.when(zoneRepository.findById(zone_3.getId())).thenReturn(Optional.of(zone_3));
@@ -98,7 +102,7 @@ class ZoneControllerTest {
 
     @Test
     void aZoneShouldBeDeleted()throws Exception{
-        Zone zone1 = new Zone(3L, "Almafuerte", "Salta", 190, "50",true);
+        Zone zone1 = new Zone(1L, "Cordoba", "Sinsacate", 190, "50", "General Paz", true);
 
         Mockito.when(zoneRepository.findById(zone1.getId())).thenReturn(Optional.of(zone1));
 
@@ -107,6 +111,22 @@ class ZoneControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
+    }
+
+    @Test
+    void weShouldGetAllZones() throws Exception {
+        Zone zone1 = new Zone(1L, "Cordoba", "Sinsacate", 190, "50", "General Paz", true);
+        Zone zone2 = new Zone(2L, "Almafuerte", "Salta", 190, "50", "Yapeyu" ,true);
+        List<Zone> records = new ArrayList<>(Arrays.asList(zone1, zone2));
+
+        Mockito.when(zoneService.getZones()).thenReturn(records);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/zones")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[1].name", is("Almafuerte")));
     }
 
 }

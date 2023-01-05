@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.FinalPil.service.ZoneService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/zones")
 @RequiredArgsConstructor
@@ -40,5 +42,20 @@ public class ZoneController {
         zoneService.deleteZone(id);
         return "Zone deleted succefully.";
 
+    }
+
+    @GetMapping
+    public List<Zone> getZones(){
+        return zoneService.getZones();
+    }
+
+    @GetMapping("/{id}")
+    public Zone getZoneById(@PathVariable Long id){
+        return zoneService.getZoneById(id);
+    }
+
+    @GetMapping("/{neighborhood}")
+    public Zone getZoneByNeighborhood(@PathVariable String neighborhood){
+        return zoneService.getZoneByNeighborhood(neighborhood);
     }
 }
