@@ -29,6 +29,12 @@ public class Zone {
     @Column(nullable = false)
     private String coordinates;
 
+    @Column(nullable = false)
+    private String neighborhood;
+
+    //@Column(nullable = false)
+    //private String wasteSorting;
+
 
     //Clasificacion falta saber como vamos a implentar (enum, etc)
 
