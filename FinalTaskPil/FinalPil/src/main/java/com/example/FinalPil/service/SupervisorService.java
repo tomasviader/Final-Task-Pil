@@ -6,4 +6,6 @@ import com.example.FinalPil.model.Zone;
 public interface SupervisorService {
 
     Supervisor saveSupervisor(Supervisor supervisor);
+
+    Supervisor modifySupervisor(Long id, Supervisor supervisor);
 }

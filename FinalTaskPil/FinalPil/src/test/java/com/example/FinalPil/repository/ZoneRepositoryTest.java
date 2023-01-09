@@ -65,7 +65,6 @@ class ZoneRepositoryTest {
 
         assertEquals(zoneUpdated.getName(), newName);
         assertEquals(zoneUpdated.getCoordinates(), "20");
-
     }
 
     @Test
