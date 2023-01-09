@@ -5,9 +5,7 @@ import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.repository.ZoneRepository;
 import com.example.FinalPil.service.ZoneService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -42,7 +40,7 @@ class ZoneControllerTest {
     @MockBean
     ZoneService zoneService;
     
-     @MockBean
+    @MockBean
     ZoneRepository zoneRepository;
     
     
@@ -54,7 +52,9 @@ class ZoneControllerTest {
                 .number(200)
                 .coordinates("40")
                 .neighborhood("Centro")
-                .status(true).build();
+                .status(true)
+                .battery(true)
+                .build();
 
         when(zoneService.saveZone(zone)).thenReturn(zone);
 
@@ -72,8 +72,16 @@ class ZoneControllerTest {
     @Test
     void aZoneShouldBeModified() throws Exception {
 
+        Zone zone_3 = Zone.builder()
+                .id(1L)
+                .name("Cordoba")
+                .street("Sinsacate")
+                .number(190)
+                .coordinates("50")
+                .neighborhood("General Paz")
+                .status(true)
+                .build();
 
-        Zone zone_3 = new Zone(1L, "Cordoba", "Sinsacate", 190, "50", "General Paz", true);
 
 
         Zone updatedZone = Zone.builder()
@@ -103,7 +111,16 @@ class ZoneControllerTest {
 
     @Test
     void aZoneShouldBeDeleted()throws Exception{
-        Zone zone1 = new Zone(1L, "Cordoba", "Sinsacate", 190, "50", "General Paz", true);
+        Zone zone1 = Zone.builder()
+                .id(1L)
+                .name("Cordoba")
+                .street("Sinsacate")
+                .number(190)
+                .coordinates("50")
+                .neighborhood("General Paz")
+                .status(true)
+                .build();
+
 
         Mockito.when(zoneRepository.findById(zone1.getId())).thenReturn(Optional.of(zone1));
 
@@ -116,8 +133,26 @@ class ZoneControllerTest {
 
     @Test
     void weShouldGetAllZones() throws Exception {
-        Zone zone1 = new Zone(1L, "Cordoba", "Sinsacate", 190, "50", "General Paz", true);
-        Zone zone2 = new Zone(2L, "Almafuerte", "Salta", 190, "50", "Yapeyu" ,true);
+        Zone zone1 = Zone.builder()
+                .id(1L)
+                .name("Pampa")
+                .street("Colon")
+                .number(190)
+                .coordinates("34")
+                .neighborhood("General Paz")
+                .status(true)
+                .build();
+
+        Zone zone2 = Zone.builder()
+                .id(2L)
+                .name("Almafuerte")
+                .street("Salta")
+                .number(3000)
+                .coordinates("50")
+                .neighborhood("Yapeyu")
+                .status(false)
+                .build();
+
         List<Zone> records = new ArrayList<>(Arrays.asList(zone1, zone2));
 
         Mockito.when(zoneService.getZones()).thenReturn(records);
@@ -134,7 +169,7 @@ class ZoneControllerTest {
     public void weShouldGetAZoneById() throws Exception {
         Zone zone1 = Zone.builder()
                 .id(4L)
-                .name("Cba")
+                .name("Catamarca")
                 .street("Jujuy")
                 .number(200)
                 .coordinates("40")
@@ -150,7 +185,7 @@ class ZoneControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", notNullValue()))
-                .andExpect(jsonPath("$.name", is("Cba")));
+                .andExpect(jsonPath("$.name", is("Catamarca")));
     }
 
 }
