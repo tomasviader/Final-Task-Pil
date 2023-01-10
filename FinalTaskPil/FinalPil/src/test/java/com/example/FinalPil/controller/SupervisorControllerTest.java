@@ -1,10 +1,12 @@
 package com.example.FinalPil.controller;
 
 import com.example.FinalPil.model.Supervisor;
+import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.repository.SupervisorRepository;
 import com.example.FinalPil.service.SupervisorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -12,6 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.Optional;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.Mockito.when;
@@ -30,6 +35,8 @@ class SupervisorControllerTest {
     @MockBean
     SupervisorService supervisorService;
 
+    @MockBean
+    SupervisorRepository supervisorRepository;
 
     @Test
     void aNewSupervisorShouldBeCreated() throws Exception {
@@ -48,5 +55,22 @@ class SupervisorControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.supervisorName", is("Carlos")));
+    }
+
+    @Test
+    void aSupervisorShouldBeDeleted()throws Exception{
+        Supervisor supervisor = Supervisor.builder()
+                .id(1L)
+                .supervisorName("Lautaro")
+                .build();
+
+
+        Mockito.when(supervisorRepository.findById(supervisor.getId())).thenReturn(Optional.of(supervisor));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/supervisors/3")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
     }
 }
