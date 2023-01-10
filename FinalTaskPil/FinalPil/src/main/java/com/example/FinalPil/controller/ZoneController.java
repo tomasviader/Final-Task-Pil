@@ -49,7 +49,7 @@ public class ZoneController {
         return zoneService.getZoneById(id);
     }
 
-   /* @GetMapping("/{neighborhood}")
+    /*@GetMapping("/{neighborhood}")
     public Zone getZoneByNeighborhood(@PathVariable String neighborhood){
         return zoneService.getZoneByNeighborhood(neighborhood);
     }*/
