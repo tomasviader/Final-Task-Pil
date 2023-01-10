@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,6 +49,7 @@ class SupervisorRepositoryTest {
         supervisorRepository.save(updatedSupervisor);
 
         assertEquals(updatedSupervisor.getSupervisorName(), newSupervisorName);
+    }
         
     @Test
     void aSupervisorShouldBeDeleted() {
@@ -58,5 +60,19 @@ class SupervisorRepositoryTest {
         assertEquals(Optional.empty(),supervisorRepository.findById(supervisor1.getId()));
 
     }
+
+    @Test
+    void weShouldGetAllSupervisors(){
+
+        supervisorRepository.save(supervisor1);
+        supervisorRepository.save(supervisor2);
+
+        ArrayList<Supervisor> saveSupervisors = new ArrayList<>();
+        saveSupervisors.add(supervisor1);
+        saveSupervisors.add(supervisor2);
+
+        assertEquals(saveSupervisors.get(1).getSupervisorName(), supervisor2.getSupervisorName());
+    }
+
 
 }
