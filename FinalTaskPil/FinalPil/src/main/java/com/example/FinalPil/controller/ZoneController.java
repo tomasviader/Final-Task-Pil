@@ -1,22 +1,15 @@
 package com.example.FinalPil.controller;
 
 
-import com.example.FinalPil.repository.ZoneRepository;
-import jakarta.websocket.server.PathParam;
-
 import lombok.RequiredArgsConstructor;
 import com.example.FinalPil.model.Zone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.example.FinalPil.service.ZoneService;
-
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.FinalPil.service.ZoneService;
 
 import java.util.List;
 
@@ -26,7 +19,7 @@ import java.util.List;
 public class ZoneController {
     @Autowired
     ZoneService zoneService;
-    private final ZoneRepository zoneRepository;
+
 
     @PostMapping
     public Zone saveZone(@RequestBody Zone zone){
