@@ -35,7 +35,6 @@ class SupervisorRepositoryTest {
     }
 
     @Test
-
     void aSupervisorShouldBeModified() {
         Supervisor savedSupervisor = supervisorRepository.save(supervisor1);
 
@@ -49,7 +48,8 @@ class SupervisorRepositoryTest {
         supervisorRepository.save(updatedSupervisor);
 
         assertEquals(updatedSupervisor.getSupervisorName(), newSupervisorName);
-
+        
+    @Test
     void aSupervisorShouldBeDeleted() {
         supervisorRepository.save(supervisor1);
 
