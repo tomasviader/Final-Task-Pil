@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/supervisors")
 @RequiredArgsConstructor
@@ -34,4 +36,13 @@ public class SupervisorController {
         }
     }
 
+    @GetMapping
+    public List<Supervisor> getSupervisors(){
+        return supervisorService.getSupervisors();
+    }
+
+    @GetMapping("/{id}")
+    public Supervisor getSupervisorById(@PathVariable Long id){
+        return supervisorService.getSupervisorById(id);
+    }
 }

@@ -3,6 +3,8 @@ package com.example.FinalPil.service;
 import com.example.FinalPil.model.Supervisor;
 import com.example.FinalPil.model.Zone;
 
+import java.util.List;
+
 public interface SupervisorService {
 
     Supervisor saveSupervisor(Supervisor supervisor);
@@ -11,4 +13,7 @@ public interface SupervisorService {
 
     boolean deleteSupervisor(Long id);
 
+    List<Supervisor> getSupervisors();
+
+    Supervisor getSupervisorById(Long id);
 }
