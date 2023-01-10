@@ -61,7 +61,6 @@ class SupervisorControllerTest {
     }
 
     @Test
-
     void aSupervisorShouldBeModified() throws Exception {
 
         Supervisor supervisor = Supervisor.builder()
@@ -85,13 +84,14 @@ class SupervisorControllerTest {
         this.mockMvc.perform(mockRequest)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.supervisorName", is("Laura")));
-    }
-    void aSupervisorShouldBeDeleted()throws Exception{
+     }          
+
+    @Test
+    void aSupervisorShouldBeDeleted() throws Exception{
         Supervisor supervisor = Supervisor.builder()
                 .id(1L)
                 .supervisorName("Lautaro")
                 .build();
-
 
         Mockito.when(supervisorRepository.findById(supervisor.getId())).thenReturn(Optional.of(supervisor));
 
@@ -127,7 +127,7 @@ class SupervisorControllerTest {
     }
 
     @Test
-    public void weShouldGetASupervisorById() throws Exception{
+    void weShouldGetASupervisorById() throws Exception {
         Supervisor supervisor1 = Supervisor.builder()
                 .id(4L)
                 .supervisorName("Lautaro")
@@ -143,3 +143,4 @@ class SupervisorControllerTest {
                 .andExpect(jsonPath("$.supervisorName", is("Lautaro")));
     }
 }
+
