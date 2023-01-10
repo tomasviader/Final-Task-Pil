@@ -18,4 +18,14 @@ public class SupervisorServiceImpl implements SupervisorService{
     public Supervisor saveSupervisor(Supervisor supervisor) {
         return supervisorRepository.save(supervisor);
     }
+
+    @Override
+    public boolean deleteSupervisor(Long id){
+        try {
+            supervisorRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
