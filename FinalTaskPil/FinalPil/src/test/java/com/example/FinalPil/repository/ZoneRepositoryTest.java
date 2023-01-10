@@ -1,7 +1,6 @@
 package com.example.FinalPil.repository;
 
 import com.example.FinalPil.model.Zone;
-import com.example.FinalPil.service.ZoneService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,9 +16,25 @@ class ZoneRepositoryTest {
     @Autowired
     ZoneRepository zoneRepository;
 
-    final Zone zone1 = new Zone(1L, "Salta", "Fl", 190, "50", "General Paz", true);
-    final Zone zone2 = new Zone(2L, "Cordoba", "Sinsacate", 190, "50", "General Paz", true);
 
+    Zone zone1 = Zone.builder()
+            .id(1L)
+            .name("Salta")
+            .street("Fl")
+            .number(190)
+            .coordinates("50")
+            .neighborhood("General Paz")
+            .status(true)
+            .build();
+    Zone zone2 = Zone.builder()
+            .id(2L)
+            .name("Cordoba")
+            .street("Sinsacate")
+            .number(190)
+            .coordinates("50")
+            .neighborhood("General Paz")
+            .status(true)
+            .build();
 
 
     @Test
@@ -35,7 +50,15 @@ class ZoneRepositoryTest {
         Zone savedZone = zoneRepository.save(zone1);
 
         String newName = "Jujuy";
-        Zone zoneUpdated = new Zone(1L, newName, "Islas Malvinas", 700, "20", "San Vicente" , true);
+        Zone zoneUpdated = Zone.builder()
+                .id(1L)
+                .name(newName)
+                .street("Islas Malvinas")
+                .number(700)
+                .coordinates("20")
+                .neighborhood("San Vicente")
+                .status(true)
+                .build();
 
         zone1.setId(1L);
         zoneRepository.save(zoneUpdated);
