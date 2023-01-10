@@ -5,6 +5,9 @@ import com.example.FinalPil.model.Zone;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -32,6 +35,7 @@ class SupervisorRepositoryTest {
     }
 
     @Test
+
     void aSupervisorShouldBeModified() {
         Supervisor savedSupervisor = supervisorRepository.save(supervisor1);
 
@@ -45,6 +49,14 @@ class SupervisorRepositoryTest {
         supervisorRepository.save(updatedSupervisor);
 
         assertEquals(updatedSupervisor.getSupervisorName(), newSupervisorName);
+
+    void aSupervisorShouldBeDeleted() {
+        supervisorRepository.save(supervisor1);
+
+        supervisorRepository.delete(supervisor1);
+
+        assertEquals(Optional.empty(),supervisorRepository.findById(supervisor1.getId()));
+
     }
 
 }

@@ -24,5 +24,14 @@ public class SupervisorController {
         return supervisorService.modifySupervisor(id, supervisor);
     }
 
+    @DeleteMapping("{id}")
+    public String deleteSupervisor(@PathVariable Long id){
+        boolean ok = supervisorService.deleteSupervisor(id);
+        if (ok){
+           return "Supervisor with id " + id + " deleted";
+        }else {
+            return "Cannot delete Supervisor with id " + id;
+        }
+    }
 
 }
