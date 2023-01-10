@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Table(name = "\"Report\"")
 @Data
@@ -16,14 +17,13 @@ public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     @Column(nullable = false)
     private String supervisor;//change
 
     @Column(nullable = false)
-    private Zone zone;
+    private String zone;
 
     @Column(length = 8)
     private String capacity; //change
@@ -38,3 +38,4 @@ public class Report {
     private String complaint; //change
 
 }
+
