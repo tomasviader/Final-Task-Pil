@@ -3,6 +3,7 @@ package com.example.FinalPil.controller;
 import com.example.FinalPil.model.Supervisor;
 import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.repository.SupervisorRepository;
+import com.example.FinalPil.repository.ZoneRepository;
 import com.example.FinalPil.service.SupervisorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -58,6 +59,31 @@ class SupervisorControllerTest {
     }
 
     @Test
+
+    void aSupervisorShouldBeModified() throws Exception {
+
+        Supervisor supervisor = Supervisor.builder()
+                .id(1L)
+                .supervisorName("Pepe")
+                .build();
+
+        Supervisor updatedSupervisor = Supervisor.builder()
+                .id(supervisor.getId())
+                .supervisorName("Laura")
+                .build();
+
+        Mockito.when(supervisorRepository.findById(supervisor.getId())).thenReturn(Optional.of(supervisor));
+        Mockito.when(supervisorService.modifySupervisor(updatedSupervisor.getId(),updatedSupervisor)).thenReturn(updatedSupervisor);
+
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/supervisors/"+ updatedSupervisor.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(this.mapper.writeValueAsString(updatedSupervisor));
+
+        this.mockMvc.perform(mockRequest)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.supervisorName", is("Laura")));
+
     void aSupervisorShouldBeDeleted()throws Exception{
         Supervisor supervisor = Supervisor.builder()
                 .id(1L)

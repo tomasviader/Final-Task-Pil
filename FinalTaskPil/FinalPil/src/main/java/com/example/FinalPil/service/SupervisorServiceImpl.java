@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @AllArgsConstructor
 public class SupervisorServiceImpl implements SupervisorService{
@@ -20,6 +22,17 @@ public class SupervisorServiceImpl implements SupervisorService{
     }
 
     @Override
+
+    public Supervisor modifySupervisor(Long id, Supervisor supervisor) {
+        Supervisor supervisorDB = supervisorRepository.findById(id).get();
+
+        if (Objects.nonNull(supervisor.getSupervisorName())) {
+            supervisorDB.setSupervisorName(supervisor.getSupervisorName());
+        }
+
+        return supervisorRepository.save(supervisorDB);
+    }
+
     public boolean deleteSupervisor(Long id){
         try {
             supervisorRepository.deleteById(id);
@@ -28,4 +41,5 @@ public class SupervisorServiceImpl implements SupervisorService{
             return false;
         }
     }
+
 }

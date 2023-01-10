@@ -19,6 +19,11 @@ public class SupervisorController {
         return supervisorService.saveSupervisor(supervisor);
     }
 
+    @PutMapping("/{id}")
+    public Supervisor modifySupervisor(@PathVariable Long id, @RequestBody Supervisor supervisor) {
+        return supervisorService.modifySupervisor(id, supervisor);
+    }
+
     @DeleteMapping("{id}")
     public String deleteSupervisor(@PathVariable Long id){
         boolean ok = supervisorService.deleteSupervisor(id);
@@ -28,4 +33,5 @@ public class SupervisorController {
             return "Cannot delete Supervisor with id " + id;
         }
     }
+
 }

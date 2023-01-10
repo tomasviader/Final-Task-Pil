@@ -7,5 +7,8 @@ public interface SupervisorService {
 
     Supervisor saveSupervisor(Supervisor supervisor);
 
+    Supervisor modifySupervisor(Long id, Supervisor supervisor);
+
     boolean deleteSupervisor(Long id);
+
 }
