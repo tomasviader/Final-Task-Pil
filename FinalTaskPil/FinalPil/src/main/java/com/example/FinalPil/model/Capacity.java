@@ -6,5 +6,4 @@ public enum Capacity {
     HALFFULL,
     FULL,
     EXCEEDSCAPACITY
-
 }

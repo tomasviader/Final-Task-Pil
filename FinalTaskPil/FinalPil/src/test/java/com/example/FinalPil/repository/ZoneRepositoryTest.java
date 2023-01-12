@@ -4,10 +4,8 @@ import com.example.FinalPil.model.Zone;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import java.util.ArrayList;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -22,8 +20,7 @@ class ZoneRepositoryTest {
             .name("Salta")
             .street("Fl")
             .number(190)
-            .latitude(34)
-            .longitude(65)
+            .longitude(30)
             .neighborhood("General Paz")
             .status(true)
             .build();
@@ -32,15 +29,14 @@ class ZoneRepositoryTest {
             .name("Cordoba")
             .street("Sinsacate")
             .number(190)
-            .latitude(44)
-            .longitude(55)
+            .longitude(30)
             .neighborhood("General Paz")
             .status(true)
             .build();
 
 
     @Test
-    void aNewTestShouldBeCreated(){
+    void aNewZoneShouldBeCreated(){
 
         Zone savedZone = zoneRepository.save(zone1);
 
@@ -57,17 +53,17 @@ class ZoneRepositoryTest {
                 .name(newName)
                 .street("Islas Malvinas")
                 .number(700)
-                .latitude(34)
-                .longitude(65)
+                .latitude(20)
+                .longitude(30)
                 .neighborhood("San Vicente")
                 .status(true)
                 .build();
 
         zone1.setId(1L);
         zoneRepository.save(zoneUpdated);
-
         assertEquals(zoneUpdated.getName(), newName);
-        assertEquals(zoneUpdated.getLatitude(), 34);
+        assertEquals(zoneUpdated.getLatitude(), 20);
+
     }
 
     @Test

@@ -11,8 +11,6 @@ import java.util.List;
 public interface ZoneRepository extends JpaRepository<Zone, Long> {
 
     Zone findByName(String name);
-
-
     Zone findByNeighborhood(String neighborhood);
 
 }

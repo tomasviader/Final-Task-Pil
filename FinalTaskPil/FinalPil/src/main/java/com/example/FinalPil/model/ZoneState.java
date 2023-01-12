@@ -4,7 +4,7 @@ public enum ZoneState {
 
     INACCESSIBLE,
     REMOVED,
-    DEMAGED,
-    INMAINTENANCE
+    DAMAGED,
+    IN_MAINTENANCE
 
 }

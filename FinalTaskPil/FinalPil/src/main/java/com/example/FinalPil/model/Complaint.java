@@ -4,6 +4,6 @@ public enum Complaint {
 
     UNUSED_AREA,
     VANDALISM,
-    OTHER_RAZON
+    OTHER_REASON
 
 }
