@@ -1,9 +1,7 @@
 package com.example.FinalPil.controller;
 
 import com.example.FinalPil.model.Supervisor;
-import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.repository.SupervisorRepository;
-import com.example.FinalPil.repository.ZoneRepository;
 import com.example.FinalPil.service.SupervisorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

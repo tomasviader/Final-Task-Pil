@@ -23,7 +23,6 @@ public class SupervisorServiceImpl implements SupervisorService{
     }
 
     @Override
-
     public Supervisor modifySupervisor(Long id, Supervisor supervisor) {
         Supervisor supervisorDB = supervisorRepository.findById(id).get();
 
@@ -34,6 +33,7 @@ public class SupervisorServiceImpl implements SupervisorService{
         return supervisorRepository.save(supervisorDB);
     }
 
+    @Override
     public boolean deleteSupervisor(Long id){
         try {
             supervisorRepository.deleteById(id);

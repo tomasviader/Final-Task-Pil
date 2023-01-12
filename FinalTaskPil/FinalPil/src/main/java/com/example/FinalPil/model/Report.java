@@ -27,17 +27,20 @@ public class Report {
     @JoinColumn(nullable = false)
     private Zone zone;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 8)
-    private String capacity; //change
+    private Capacity capacity;
 
     @Column(nullable = false)
     private boolean needResorting;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String zoneState; //change
+    private ZoneState zoneState;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String complaint; //change
+    private Complaint complaint;
 
 }
 
