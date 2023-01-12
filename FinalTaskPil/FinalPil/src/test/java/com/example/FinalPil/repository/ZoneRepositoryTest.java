@@ -22,7 +22,8 @@ class ZoneRepositoryTest {
             .name("Salta")
             .street("Fl")
             .number(190)
-            .coordinates("50")
+            .latitude(20)
+            .longitude(30)
             .neighborhood("General Paz")
             .status(true)
             .build();
@@ -31,7 +32,8 @@ class ZoneRepositoryTest {
             .name("Cordoba")
             .street("Sinsacate")
             .number(190)
-            .coordinates("50")
+            .latitude(20)
+            .longitude(30)
             .neighborhood("General Paz")
             .status(true)
             .build();
@@ -55,7 +57,8 @@ class ZoneRepositoryTest {
                 .name(newName)
                 .street("Islas Malvinas")
                 .number(700)
-                .coordinates("20")
+                .latitude(20)
+                .longitude(30)
                 .neighborhood("San Vicente")
                 .status(true)
                 .build();
@@ -64,7 +67,7 @@ class ZoneRepositoryTest {
         zoneRepository.save(zoneUpdated);
 
         assertEquals(zoneUpdated.getName(), newName);
-        assertEquals(zoneUpdated.getCoordinates(), "20");
+        assertEquals(zoneUpdated.getLatitude(), 20);
 
     }
 
