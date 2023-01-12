@@ -33,8 +33,12 @@ public class ZoneServiceImpl implements ZoneService {
             zoneDB.setNumber(zone.getNumber());
         }
 
-        if (Objects.nonNull(zone.getCoordinates())) {
-            zoneDB.setCoordinates(zone.getCoordinates());
+        if (Objects.nonNull(zone.getLatitude())) {
+            zoneDB.setLatitude(zone.getLatitude());
+        }
+
+        if (Objects.nonNull(zone.getLongitude())) {
+            zoneDB.setLongitude(zone.getLongitude());
         }
 
         if (Objects.nonNull(zone.isStatus())){

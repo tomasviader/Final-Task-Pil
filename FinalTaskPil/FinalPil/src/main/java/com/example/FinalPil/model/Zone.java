@@ -26,7 +26,10 @@ public class Zone {
     private int number;
 
     @Column(nullable = false)
-    private String coordinates;
+    private int latitude;
+
+    @Column(nullable = false)
+    private int longitude;
 
     @Column(nullable = false)
     private String neighborhood;
