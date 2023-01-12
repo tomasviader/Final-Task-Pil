@@ -27,7 +27,7 @@ public class Report {
     @JoinColumn(nullable = false)
     private Zone zone;
 
-   /* @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(length = 8)
     private Capacity capacity;
 
@@ -40,7 +40,7 @@ public class Report {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Complaint complaint;*/
+    private Complaint complaint;
 
 }
 
