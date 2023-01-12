@@ -40,12 +40,4 @@ public class ReportRepositoryTest {
             .needResorting(false)
             .build();
 
-    /*@Test
-    void aNewReportShouldBeCreated(){
-
-        Report savedReport = reportRepository.save(report);
-
-        assertNotNull(savedReport);
-    }*/
-
 }

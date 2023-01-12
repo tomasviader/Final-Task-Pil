@@ -21,7 +21,7 @@ class ZoneRepositoryTest {
             .street("Fl")
             .number(190)
             .longitude(30)
-            .neighborhood("General Paz")
+            .neighborhood("Centro")
             .status(true)
             .build();
     Zone zone2 = Zone.builder()
@@ -89,7 +89,7 @@ class ZoneRepositoryTest {
         assertEquals(saveZones.get(1).getName(), zone2.getName());
     }
 
-    /*Test
+    @Test
     void weShouldGetById(){
         zoneRepository.save(zone1);
         Long id = 1L;
@@ -99,6 +99,15 @@ class ZoneRepositoryTest {
         assertEquals(testZone.getStreet(), zone1.getStreet());
     }
 
-     */
+    @Test
+    void weShouldGetByNeighborhood(){
+        zoneRepository.save(zone1);
+        String neigh = "Centro";
+
+        Zone testZone = zoneRepository.findByNeighborhood(neigh);
+
+        assertEquals(testZone.getNeighborhood(), zone1.getNeighborhood());
+    }
+
 
 }

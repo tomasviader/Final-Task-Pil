@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Builder
 public class Supervisor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -21,4 +21,5 @@ public class Supervisor {
 
     @Column(nullable = false)
     private String supervisorName;
+
 }

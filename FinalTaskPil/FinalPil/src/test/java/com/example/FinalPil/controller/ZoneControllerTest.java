@@ -190,6 +190,31 @@ class ZoneControllerTest {
                 .andExpect(jsonPath("$.name", is("Catamarca")));
     }
 
+    @Test
+    public void weShouldGetAZoneByNeighborhood() throws Exception {
+        Zone zone1 = Zone.builder()
+                .id(4L)
+                .name("Catamarca")
+                .street("Jujuy")
+                .number(200)
+                .latitude(20)
+                .longitude(30)
+                .neighborhood("Centro")
+                .status(false)
+                .build();
+
+        Mockito.when(zoneService.getZoneByNeighborhood(zone1.getNeighborhood())).thenReturn(zone1);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/zones/neighborhood/" + zone1.getNeighborhood())
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.name", is("Catamarca")));
+    }
+
+
 
 
 
