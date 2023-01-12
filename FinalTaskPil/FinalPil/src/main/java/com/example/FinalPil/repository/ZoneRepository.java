@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface ZoneRepository extends JpaRepository<Zone, Long> {
 
     Zone findByName(String name);
-
-
     Zone findByNeighborhood(String neighborhood);
 
 }
