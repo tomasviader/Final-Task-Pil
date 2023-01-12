@@ -67,8 +67,12 @@ class ZoneRepositoryTest {
         zoneRepository.save(zoneUpdated);
 
         assertEquals(zoneUpdated.getName(), newName);
+<<<<<<< HEAD
         assertEquals(zoneUpdated.getLatitude(), 20);
 
+=======
+        assertEquals(zoneUpdated.getCoordinates(), "20");
+>>>>>>> df719d43fec7d9cfd529f8e18cc6f64e9f354ea8
     }
 
     @Test

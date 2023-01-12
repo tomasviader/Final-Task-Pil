@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/supervisors")
 @RequiredArgsConstructor
@@ -19,6 +21,11 @@ public class SupervisorController {
         return supervisorService.saveSupervisor(supervisor);
     }
 
+    @PutMapping("/{id}")
+    public Supervisor modifySupervisor(@PathVariable Long id, @RequestBody Supervisor supervisor) {
+        return supervisorService.modifySupervisor(id, supervisor);
+    }
+
     @DeleteMapping("{id}")
     public String deleteSupervisor(@PathVariable Long id){
         boolean ok = supervisorService.deleteSupervisor(id);
@@ -27,5 +34,15 @@ public class SupervisorController {
         }else {
             return "Cannot delete Supervisor with id " + id;
         }
+    }
+
+    @GetMapping
+    public List<Supervisor> getSupervisors(){
+        return supervisorService.getSupervisors();
+    }
+
+    @GetMapping("/{id}")
+    public Supervisor getSupervisorById(@PathVariable Long id){
+        return supervisorService.getSupervisorById(id);
     }
 }

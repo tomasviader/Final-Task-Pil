@@ -51,4 +51,5 @@ public class Zone {
 
     @Column(nullable = false)
     private boolean nonRecyclableWaste;
+
 }
