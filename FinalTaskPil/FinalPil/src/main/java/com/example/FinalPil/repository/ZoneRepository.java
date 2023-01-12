@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
 public interface ZoneRepository extends JpaRepository<Zone, Long> {
 
     Zone findByName(String name);

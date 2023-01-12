@@ -19,11 +19,13 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String supervisor;//change
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Supervisor supervisor;
 
-    @Column(nullable = false)
-    private String zone;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Zone zone;
 
     @Column(length = 8)
     private String capacity; //change

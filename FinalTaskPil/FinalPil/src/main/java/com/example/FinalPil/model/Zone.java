@@ -16,17 +16,20 @@ public class Zone {
 
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "01_name")
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "02_streetName")
     private String street;
 
-    @Column(length = 8)
+    @Column(length = 8, name = "03_streetNumber")
     private int number;
 
-    @Column(nullable = false)
-    private String coordinates;
+    @Column(nullable = false, name = "04_latitude")
+    private int latitude;
+
+    @Column(nullable = false, name = "05_longitude")
+    private int longitude;
 
     @Column(nullable = false)
     private String neighborhood;

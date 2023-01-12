@@ -50,7 +50,8 @@ class ZoneControllerTest {
                 .name("Cba")
                 .street("Salta")
                 .number(200)
-                .coordinates("40")
+                .latitude(34)
+                .longitude(65)
                 .neighborhood("Centro")
                 .status(true)
                 .battery(true)
@@ -77,7 +78,8 @@ class ZoneControllerTest {
                 .name("Cordoba")
                 .street("Sinsacate")
                 .number(190)
-                .coordinates("50")
+                .latitude(43)
+                .longitude(25)
                 .neighborhood("General Paz")
                 .status(true)
                 .build();
@@ -89,7 +91,8 @@ class ZoneControllerTest {
                 .name("Cba")
                 .street("Jujuy")
                 .number(200)
-                .coordinates("40")
+                .latitude(34)
+                .longitude(65)
                 .neighborhood("Centro")
                 .status(false)
                 .build();
@@ -116,7 +119,8 @@ class ZoneControllerTest {
                 .name("Cordoba")
                 .street("Sinsacate")
                 .number(190)
-                .coordinates("50")
+                .latitude(43)
+                .longitude(15)
                 .neighborhood("General Paz")
                 .status(true)
                 .build();
@@ -129,6 +133,7 @@ class ZoneControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
+
     }
 
     @Test
@@ -138,7 +143,8 @@ class ZoneControllerTest {
                 .name("Pampa")
                 .street("Colon")
                 .number(190)
-                .coordinates("34")
+                .latitude(56)
+                .longitude(95)
                 .neighborhood("General Paz")
                 .status(true)
                 .build();
@@ -148,7 +154,8 @@ class ZoneControllerTest {
                 .name("Almafuerte")
                 .street("Salta")
                 .number(3000)
-                .coordinates("50")
+                .latitude(34)
+                .longitude(65)
                 .neighborhood("Yapeyu")
                 .status(false)
                 .build();
@@ -172,7 +179,8 @@ class ZoneControllerTest {
                 .name("Catamarca")
                 .street("Jujuy")
                 .number(200)
-                .coordinates("40")
+                .latitude(34)
+                .longitude(65)
                 .neighborhood("Centro")
                 .status(false)
                 .build();

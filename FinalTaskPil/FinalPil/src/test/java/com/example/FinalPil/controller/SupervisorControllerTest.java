@@ -99,7 +99,6 @@ class SupervisorControllerTest {
                         .delete("/supervisors/3")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
     }
 
     @Test
