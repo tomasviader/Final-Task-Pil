@@ -69,7 +69,7 @@ public class ZoneServiceImpl implements ZoneService {
     }
 
     @Override
-    public double getDistanceBetweenZonesById(Long idZone1, Long idZone2){
+    public String getDistanceBetweenZonesById(Long idZone1, Long idZone2){
 
         Zone zone1 = getZoneById(idZone1);
         Zone zone2 = getZoneById(idZone2);
@@ -80,9 +80,11 @@ public class ZoneServiceImpl implements ZoneService {
         double lonZoneTwo = Math.toRadians(zone2.getLongitude());
         double earthRadius = 6371.01;
 
-        return Math.round(earthRadius * Math.acos(Math.sin(latZoneOne) * Math.sin(latZoneTwo)
+        double result = Math.round(earthRadius * Math.acos(Math.sin(latZoneOne) * Math.sin(latZoneTwo)
                 + Math.cos(latZoneOne) * Math.cos(latZoneTwo) * Math.cos(lonZoneOne - lonZoneTwo)));
 
+        return "The distance between " + zone1.getName() + " and " + zone2.getName()
+                + " is: " + result + "Km.";
     }
 }
 

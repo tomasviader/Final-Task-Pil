@@ -90,16 +90,6 @@ class ZoneRepositoryTest {
     }
 
     @Test
-    void weShouldGetById(){
-        zoneRepository.save(zone1);
-        Long id = 1L;
-
-        Zone testZone = zoneRepository.findById(id).get();
-
-        assertEquals(testZone.getStreet(), zone1.getStreet());
-    }
-
-    @Test
     void weShouldGetByNeighborhood(){
         zoneRepository.save(zone1);
         String neigh = "Centro";

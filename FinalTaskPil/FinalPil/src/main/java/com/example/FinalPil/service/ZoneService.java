@@ -22,6 +22,6 @@ public interface ZoneService {
 
     Zone getZoneByNeighborhood(String neighborhood);
 
-    double getDistanceBetweenZonesById(Long idZone1, Long idZone2);
+    String getDistanceBetweenZonesById(Long idZone1, Long idZone2);
 
 }

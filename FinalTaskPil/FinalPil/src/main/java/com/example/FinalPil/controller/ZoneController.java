@@ -62,7 +62,7 @@ public class ZoneController {
     }
 
     @GetMapping("/distance/{id1}-{id2}")
-    public double getDistance(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2){
+    public String getDistance(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2){
         return zoneService.getDistanceBetweenZonesById(id1, id2);
     }
 

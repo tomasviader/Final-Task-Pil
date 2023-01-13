@@ -245,7 +245,7 @@ class ZoneControllerTest {
 
         Mockito.when(zoneService.getZoneById(zone1.getId())).thenReturn(zone1);
         Mockito.when(zoneService.getZoneById(zone2.getId())).thenReturn(zone2);
-        Mockito.when(zoneService.getDistanceBetweenZonesById(zone1.getId(), zone2.getId())).thenReturn(3.0);
+        Mockito.when(zoneService.getDistanceBetweenZonesById(zone1.getId(), zone2.getId())).thenReturn("The distance between Plaza Colon and Plaza España is: 3.0Km.");
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/zones/distance/" + zone1.getId() + "-" + zone2.getId())
