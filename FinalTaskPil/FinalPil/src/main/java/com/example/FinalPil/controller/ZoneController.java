@@ -10,8 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.function.RouterFunction;
+import org.springframework.web.servlet.function.ServerResponse;
 
 import java.util.List;
+
+import static org.hibernate.boot.jaxb.cfg.spi.JaxbCfgEventTypeEnum.fromValue;
+import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.web.servlet.function.RequestPredicates.GET;
+import static org.springframework.web.servlet.function.RouterFunctions.route;
 
 @RestController
 @RequestMapping(value = "/zones")
@@ -53,4 +60,11 @@ public class ZoneController {
     public Zone getZoneByNeighborhood(@PathVariable String neighborhood){
         return zoneService.getZoneByNeighborhood(neighborhood);
     }
+
+    @GetMapping("/distance/{id1}-{id2}")
+    public double getDistance(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2){
+        return zoneService.getDistanceBetweenZonesById(id1, id2);
+    }
+
+
 }
