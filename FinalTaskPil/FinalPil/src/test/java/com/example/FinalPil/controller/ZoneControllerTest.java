@@ -215,7 +215,44 @@ class ZoneControllerTest {
     }
 
 
+    @Test
+    public void weShouldGetTheDistanceBetweenTwoZonesById() throws Exception {
+        Zone zone1 = Zone.builder()
+                .id(1L)
+                .name("Plaza España")
+                .street("Avenida Irigoyen")
+                .number(594)
+                .latitude(-31.4290925)
+                .longitude(-64.18715)
+                .neighborhood("Nueva Cordoba")
+                .paper(true)
+                .battery(true)
+                .status(true)
+                .build();
 
+        Zone zone2 = Zone.builder()
+                .id(2L)
+                .name("Plaza Colon")
+                .street("Avenida Colon")
+                .number(1000)
+                .latitude(-31.4085704)
+                .longitude(-64.1981353)
+                .neighborhood("Alto Alberdi")
+                .status(true)
+                .battery(true)
+                .organicWaste(true)
+                .build();
+
+        Mockito.when(zoneService.getZoneById(zone1.getId())).thenReturn(zone1);
+        Mockito.when(zoneService.getZoneById(zone2.getId())).thenReturn(zone2);
+        Mockito.when(zoneService.getDistanceBetweenZonesById(zone1.getId(), zone2.getId())).thenReturn("The distance between Plaza Colon and Plaza España is: 3.0Km.");
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/zones/distance/" + zone1.getId() + "-" + zone2.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
 
 
 }

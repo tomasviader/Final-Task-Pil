@@ -30,9 +30,6 @@ class ReportControllerTest {
     @MockBean
     ReportService reportService;
 
-    @MockBean
-    ReportRepository reportRepository;
-
     Supervisor supervisor = Supervisor.builder()
             .id(1L)
             .supervisorName("Carlos")

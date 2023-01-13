@@ -67,5 +67,24 @@ public class ZoneServiceImpl implements ZoneService {
     public Zone getZoneByNeighborhood(String neighborhood){
         return zoneRepository.findByNeighborhood(neighborhood);
     }
+
+    @Override
+    public String getDistanceBetweenZonesById(Long idZone1, Long idZone2){
+
+        Zone zone1 = getZoneById(idZone1);
+        Zone zone2 = getZoneById(idZone2);
+
+        double latZoneOne = Math.toRadians(zone1.getLatitude());
+        double lonZoneOne = Math.toRadians(zone1.getLongitude());
+        double latZoneTwo = Math.toRadians(zone2.getLatitude());
+        double lonZoneTwo = Math.toRadians(zone2.getLongitude());
+        double earthRadius = 6371.01;
+
+        double result = Math.round(earthRadius * Math.acos(Math.sin(latZoneOne) * Math.sin(latZoneTwo)
+                + Math.cos(latZoneOne) * Math.cos(latZoneTwo) * Math.cos(lonZoneOne - lonZoneTwo)));
+
+        return "The distance between " + zone1.getName() + " and " + zone2.getName()
+                + " is: " + result + "Km.";
+    }
 }
 
