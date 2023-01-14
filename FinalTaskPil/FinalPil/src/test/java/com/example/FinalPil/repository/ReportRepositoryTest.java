@@ -19,6 +19,11 @@ public class ReportRepositoryTest {
             .supervisorName("Carlos")
             .build();
 
+    Supervisor supervisor2 = Supervisor.builder()
+            .id(2L)
+            .supervisorName("Juan")
+            .build();
+
     Zone zone = Zone.builder()
             .id(2L)
             .name("Cba")
@@ -32,12 +37,34 @@ public class ReportRepositoryTest {
             .build();
 
     Report report = Report.builder()
+            .id(1L)
             .zone(zone)
-            .supervisor(supervisor)
+            .supervisor(supervisor2)
             .capacity(Capacity.EMPTY)
             .complaint(Complaint.VANDALISM)
             .zoneState(ZoneState.INACCESSIBLE)
             .needResorting(false)
             .build();
 
+    Report report2 = Report.builder()
+            .id(2L)
+            .zone(zone)
+            .supervisor(supervisor)
+            .capacity(Capacity.FULL)
+            .complaint(Complaint.VANDALISM)
+            .zoneState(ZoneState.DAMAGED)
+            .needResorting(false)
+            .build();
+    @Test
+    void weShouldGetAllReports(){
+
+        reportRepository.save(report);
+        reportRepository.save(report2);
+
+        ArrayList<Report> saveReports = new ArrayList<>();
+        saveReports.add(report);
+        saveReports.add(report2);
+
+        assertEquals(saveReports.get(1).getZone(), report2.getZone());
+    }
 }
