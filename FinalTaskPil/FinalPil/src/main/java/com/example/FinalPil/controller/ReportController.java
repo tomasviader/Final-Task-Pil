@@ -5,10 +5,9 @@ import com.example.FinalPil.model.Supervisor;
 import com.example.FinalPil.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/reports")
@@ -22,5 +21,18 @@ public class ReportController {
         return reportService.saveReport(report);
     }
 
+    @GetMapping
+    public List<Report> getReports(){
+        return reportService.getReports();
+    }
 
+    @GetMapping("/{id}")
+    public Report getReportById(@PathVariable Long id){
+        return reportService.getReportById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Report modifyReport(@PathVariable Long id, @RequestBody Report report){
+        return reportService.modifyReport(id,report);
+    }
 }
