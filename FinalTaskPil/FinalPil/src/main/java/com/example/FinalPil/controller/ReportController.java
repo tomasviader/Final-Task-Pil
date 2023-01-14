@@ -31,5 +31,8 @@ public class ReportController {
         return reportService.getReportById(id);
     }
 
-
+    @PutMapping("/{id}")
+    public Report modifyReport(@PathVariable Long id, @RequestBody Report report){
+        return reportService.modifyReport(id,report);
+    }
 }

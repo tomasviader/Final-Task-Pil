@@ -4,8 +4,10 @@ import com.example.FinalPil.model.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
 import java.util.ArrayList;
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -55,8 +57,9 @@ public class ReportRepositoryTest {
             .zoneState(ZoneState.DAMAGED)
             .needResorting(false)
             .build();
+
     @Test
-    void weShouldGetAllReports(){
+    void weShouldGetAllReports() {
 
         reportRepository.save(report);
         reportRepository.save(report2);
@@ -66,5 +69,25 @@ public class ReportRepositoryTest {
         saveReports.add(report2);
 
         assertEquals(saveReports.get(1).getZone(), report2.getZone());
+    }
+
+    @Test
+    void aReportShouldBeModified() {
+        Report savedReport = reportRepository.save(report);
+
+        boolean newNeedResorting = true;
+        Report reportUpdated = Report.builder()
+                .id(1L)
+                .zone(zone)
+                .supervisor(supervisor)
+                .capacity(Capacity.FULL)
+                .complaint(Complaint.VANDALISM)
+                .zoneState(ZoneState.DAMAGED)
+                .needResorting(newNeedResorting)
+                .build();
+
+        report.setId(1L);
+        reportRepository.save(reportUpdated);
+        assertEquals(reportUpdated.isNeedResorting(), newNeedResorting);
     }
 }

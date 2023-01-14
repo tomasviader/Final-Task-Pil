@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
@@ -35,6 +36,9 @@ class ReportControllerTest {
 
     @MockBean
     ReportService reportService;
+
+    @MockBean
+    ReportRepository reportRepository;
 
     Supervisor supervisor = Supervisor.builder()
             .id(1L)
@@ -132,5 +136,43 @@ class ReportControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.needResorting", is(false)));
+    }
+
+    @Test
+    void aReportShouldBeModified() throws Exception {
+
+        Report report = Report.builder()
+                .id(1L)
+                .supervisor(supervisor)
+                .zone(zone)
+                .capacity(Capacity.EMPTY)
+                .needResorting(false)
+                .zoneState(ZoneState.INACCESSIBLE)
+                .complaint(Complaint.UNUSED_AREA)
+                .build();
+
+        Report reportUpdated = Report.builder()
+                .id(report.getId())
+                .supervisor(supervisor)
+                .zone(zone)
+                .capacity(Capacity.FULL)
+                .needResorting(true)
+                .zoneState(ZoneState.DAMAGED)
+                .complaint(Complaint.UNUSED_AREA)
+                .build();
+
+        Mockito.when(reportRepository.findById(report.getId())).thenReturn(Optional.of(report));
+        Mockito.when(reportService.modifyReport(reportUpdated.getId(),reportUpdated)).thenReturn(reportUpdated);
+
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/reports/"+ reportUpdated.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(reportUpdated));
+
+        this.mockMvc.perform(mockRequest)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.needResorting", is(true)))
+                .andExpect(jsonPath("$.capacity", is("FULL")));
+
     }
 }

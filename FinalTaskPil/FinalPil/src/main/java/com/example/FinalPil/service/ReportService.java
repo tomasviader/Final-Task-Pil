@@ -11,4 +11,6 @@ public interface ReportService {
     List<Report> getReports();
 
     Report getReportById(Long id);
+
+    Report modifyReport(Long id, Report report);
 }
