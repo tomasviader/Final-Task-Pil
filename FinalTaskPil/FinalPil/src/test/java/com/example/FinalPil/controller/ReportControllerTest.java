@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-
 @WebMvcTest(ReportController.class)
 class ReportControllerTest {
     @Autowired
@@ -103,7 +102,7 @@ class ReportControllerTest {
                 .complaint(Complaint.UNUSED_AREA)
                 .build();
 
-        List<Report> records = new ArrayList<>(Arrays.asList(report,report2));
+        List<Report> records = new ArrayList<>(Arrays.asList(report, report2));
 
         Mockito.when(reportService.getReports()).thenReturn(records);
 
@@ -162,9 +161,9 @@ class ReportControllerTest {
                 .build();
 
         Mockito.when(reportRepository.findById(report.getId())).thenReturn(Optional.of(report));
-        Mockito.when(reportService.modifyReport(reportUpdated.getId(),reportUpdated)).thenReturn(reportUpdated);
+        Mockito.when(reportService.modifyReport(reportUpdated.getId(), reportUpdated)).thenReturn(reportUpdated);
 
-        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/reports/"+ reportUpdated.getId())
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/reports/" + reportUpdated.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(reportUpdated));
@@ -174,5 +173,26 @@ class ReportControllerTest {
                 .andExpect(jsonPath("$.needResorting", is(true)))
                 .andExpect(jsonPath("$.capacity", is("FULL")));
 
+    }
+
+    @Test
+    void aReportShouldBeDeleted() throws Exception {
+        Report report = Report.builder()
+                .id(1L)
+                .supervisor(supervisor)
+                .zone(zone)
+                .capacity(Capacity.EMPTY)
+                .needResorting(false)
+                .zoneState(ZoneState.INACCESSIBLE)
+                .complaint(Complaint.UNUSED_AREA)
+                .build();
+
+
+        Mockito.when(reportRepository.findById(report.getId())).thenReturn(Optional.of(report));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/reports/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

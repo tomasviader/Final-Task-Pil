@@ -90,4 +90,14 @@ public class ReportRepositoryTest {
         reportRepository.save(reportUpdated);
         assertEquals(reportUpdated.isNeedResorting(), newNeedResorting);
     }
+
+    @Test
+    void aZoneShouldBeDeleted() {
+        reportRepository.save(report);
+
+        reportRepository.delete(report);
+
+        assertEquals(Optional.empty(),reportRepository.findById(report.getId()));
+
+    }
 }

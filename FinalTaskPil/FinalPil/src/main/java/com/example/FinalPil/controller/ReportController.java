@@ -35,4 +35,10 @@ public class ReportController {
     public Report modifyReport(@PathVariable Long id, @RequestBody Report report){
         return reportService.modifyReport(id,report);
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteReport(@PathVariable Long id){
+        reportService.deleteReport(id);
+        return "Report deleted succefully.";
+    }
 }
