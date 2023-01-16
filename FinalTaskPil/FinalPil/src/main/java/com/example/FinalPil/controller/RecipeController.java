@@ -29,4 +29,10 @@ public class RecipeController {
     public Recipe getRecipeById(@PathVariable Long id){
         return recipeService.getRecipeById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteRecipe(@PathVariable Long id){
+        recipeService.deleteRecipe(id);
+        return "Recipe deleted succefully.";
+    }
 }

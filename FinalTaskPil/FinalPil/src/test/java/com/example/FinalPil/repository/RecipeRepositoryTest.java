@@ -1,12 +1,12 @@
 package com.example.FinalPil.repository;
 
 import com.example.FinalPil.model.Recipe;
-import com.example.FinalPil.model.Zone;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -51,5 +51,14 @@ public class RecipeRepositoryTest {
         saveRecipes.add(recipe2);
 
         assertEquals(saveRecipes.get(1).getRecipeName(), recipe2.getRecipeName());
+    }
+
+    @Test
+    void aRecipeShouldBeDeleted() {
+        recipeRepository.save(recipe1);
+
+        recipeRepository.delete(recipe1);
+
+        assertEquals(Optional.empty(), recipeRepository.findById(recipe1.getId()));
     }
 }
