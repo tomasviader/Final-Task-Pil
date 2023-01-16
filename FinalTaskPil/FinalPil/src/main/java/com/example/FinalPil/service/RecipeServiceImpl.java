@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class RecipeServiceImpl implements RecipeService{
@@ -16,6 +18,15 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public Recipe saveRecipe(Recipe recipe){
         return recipeRepository.save(recipe);
+    }
+
+    @Override
+    public List<Recipe> getRecipes(){
+        return recipeRepository.findAll();
+    }
+
+    public Recipe getRecipeById(Long idRecipe){
+        return recipeRepository.findById(idRecipe).get();
     }
 
 
