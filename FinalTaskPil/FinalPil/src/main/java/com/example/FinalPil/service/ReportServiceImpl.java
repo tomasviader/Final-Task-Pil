@@ -61,4 +61,9 @@ public class ReportServiceImpl implements ReportService{
 
         return reportRepository.save(reportDB);
     }
+
+    @Override
+    public void deleteReport(Long id) {
+        reportRepository.deleteById(id);
+    }
 }

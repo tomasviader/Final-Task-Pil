@@ -14,4 +14,5 @@ public interface ReportService {
 
     Report modifyReport(Long id, Report report);
 
+    void deleteReport(Long id);
 }
