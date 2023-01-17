@@ -10,4 +10,6 @@ public interface RecipeService {
     List<Recipe> getRecipes();
 
     Recipe getRecipeById(Long idRecipe);
+
+    void deleteRecipe(Long id);
 }
