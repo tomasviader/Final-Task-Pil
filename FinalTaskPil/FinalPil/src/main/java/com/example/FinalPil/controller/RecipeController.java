@@ -35,4 +35,9 @@ public class RecipeController {
         recipeService.deleteRecipe(id);
         return "Recipe deleted succefully.";
     }
+
+    @GetMapping("/material/{material}")
+    public Recipe findByMaterial(@PathVariable String material){
+        return recipeService.findByMaterial(material);
+    }
 }
