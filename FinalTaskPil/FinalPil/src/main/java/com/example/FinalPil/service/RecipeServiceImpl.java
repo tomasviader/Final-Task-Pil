@@ -34,5 +34,9 @@ public class RecipeServiceImpl implements RecipeService{
         recipeRepository.deleteById(id);
     }
 
+    @Override
+    public Recipe findByMaterial(String material){
+        return recipeRepository.findByMaterial(material);
+    }
 
 }

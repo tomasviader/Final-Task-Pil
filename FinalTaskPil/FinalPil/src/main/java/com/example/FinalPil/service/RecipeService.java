@@ -12,4 +12,6 @@ public interface RecipeService {
     Recipe getRecipeById(Long idRecipe);
 
     void deleteRecipe(Long id);
+
+    Recipe findByMaterial(String material);
 }
