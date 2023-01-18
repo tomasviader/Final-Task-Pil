@@ -1,6 +1,7 @@
 package com.example.FinalPil.repository;
 
 import com.example.FinalPil.model.Recipe;
+import com.example.FinalPil.model.Zone;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -60,5 +61,15 @@ public class RecipeRepositoryTest {
         recipeRepository.delete(recipe1);
 
         assertEquals(Optional.empty(), recipeRepository.findById(recipe1.getId()));
+    }
+
+    @Test
+    void weShouldGetByMaterial(){
+        recipeRepository.save(recipe1);
+        String material = "paper";
+
+        Recipe testRecipe = recipeRepository.findByMaterial(material);
+
+        assertEquals(testRecipe.getMaterial(), recipe1.getMaterial());
     }
 }

@@ -1,6 +1,7 @@
 package com.example.FinalPil.controller;
 
 import com.example.FinalPil.model.Recipe;
+import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.repository.RecipeRepository;
 import com.example.FinalPil.service.RecipeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -121,5 +122,25 @@ public class RecipeControllerTest {
                         .delete("/recipes/1")
                         .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk());
+    }
+
+    @Test
+    public void weShouldGetARecipeByMaterial() throws Exception {
+        Recipe recipe = Recipe.builder()
+                .id(4L)
+                .recipeName("Key Ring")
+                .material("Plastic")
+                .steps("Preheat the oven to 150 degrees and cover the tray with foil.")
+                .build();
+
+        Mockito.when(recipeService.findByMaterial(recipe.getMaterial())).thenReturn(recipe);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/recipes/material/" + recipe.getMaterial())
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.recipeName", is("Key Ring")));
     }
 }
