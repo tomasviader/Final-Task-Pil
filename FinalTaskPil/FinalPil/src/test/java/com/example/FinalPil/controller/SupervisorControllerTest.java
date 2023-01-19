@@ -34,10 +34,7 @@ class SupervisorControllerTest {
     ObjectMapper mapper;
 
     @MockBean
-    SupervisorService supervisorService;
-
-    @MockBean
-    SupervisorRepository supervisorRepository;
+    SupervisorController controller;
 
     @Test
     void aNewSupervisorShouldBeCreated() throws Exception {
@@ -45,7 +42,7 @@ class SupervisorControllerTest {
                 .supervisorName("Carlos")
                 .build();
 
-        when(supervisorService.saveSupervisor(supervisor)).thenReturn(supervisor);
+        when(controller.saveSupervisor(supervisor)).thenReturn(supervisor);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/supervisors")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -71,8 +68,8 @@ class SupervisorControllerTest {
                 .supervisorName("Laura")
                 .build();
 
-        Mockito.when(supervisorRepository.findById(supervisor.getId())).thenReturn(Optional.of(supervisor));
-        Mockito.when(supervisorService.modifySupervisor(updatedSupervisor.getId(),updatedSupervisor)).thenReturn(updatedSupervisor);
+        Mockito.when(controller.getSupervisorById(supervisor.getId())).thenReturn(supervisor);
+        Mockito.when(controller.modifySupervisor(updatedSupervisor.getId(),updatedSupervisor)).thenReturn(updatedSupervisor);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/supervisors/"+ updatedSupervisor.getId())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -91,7 +88,7 @@ class SupervisorControllerTest {
                 .supervisorName("Lautaro")
                 .build();
 
-        Mockito.when(supervisorRepository.findById(supervisor.getId())).thenReturn(Optional.of(supervisor));
+        Mockito.when(controller.getSupervisorById(supervisor.getId())).thenReturn(supervisor);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .delete("/supervisors/3")
@@ -113,7 +110,7 @@ class SupervisorControllerTest {
 
         List<Supervisor> records = new ArrayList<>(Arrays.asList(supervisor1, supervisor2));
 
-        Mockito.when(supervisorService.getSupervisors()).thenReturn(records);
+        Mockito.when(controller.getSupervisors()).thenReturn(records);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/supervisors")
@@ -130,7 +127,7 @@ class SupervisorControllerTest {
                 .supervisorName("Lautaro")
                 .build();
 
-        Mockito.when(supervisorService.getSupervisorById(supervisor1.getId())).thenReturn(supervisor1);
+        Mockito.when(controller.getSupervisorById(supervisor1.getId())).thenReturn(supervisor1);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/supervisors/" + supervisor1.getId())

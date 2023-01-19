@@ -34,10 +34,7 @@ class ReportControllerTest {
     ObjectMapper objectMapper;
 
     @MockBean
-    ReportService reportService;
-
-    @MockBean
-    ReportRepository reportRepository;
+    ReportController controller;
 
     Supervisor supervisor = Supervisor.builder()
             .id(1L)
@@ -67,7 +64,7 @@ class ReportControllerTest {
                 .needResorting(false)
                 .build();
 
-        when(reportService.saveReport(report)).thenReturn(report);
+        when(controller.saveReport(report)).thenReturn(report);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/reports")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -104,7 +101,7 @@ class ReportControllerTest {
 
         List<Report> records = new ArrayList<>(Arrays.asList(report, report2));
 
-        Mockito.when(reportService.getReports()).thenReturn(records);
+        Mockito.when(controller.getReports()).thenReturn(records);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/reports")
@@ -127,7 +124,7 @@ class ReportControllerTest {
                 .build();
 
 
-        Mockito.when(reportService.getReportById(report.getId())).thenReturn(report);
+        Mockito.when(controller.getReportById(report.getId())).thenReturn(report);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/reports/" + report.getId())
@@ -160,8 +157,8 @@ class ReportControllerTest {
                 .complaint(Complaint.UNUSED_AREA)
                 .build();
 
-        Mockito.when(reportRepository.findById(report.getId())).thenReturn(Optional.of(report));
-        Mockito.when(reportService.modifyReport(reportUpdated.getId(), reportUpdated)).thenReturn(reportUpdated);
+        Mockito.when(controller.getReportById(report.getId())).thenReturn(report);
+        Mockito.when(controller.modifyReport(reportUpdated.getId(), reportUpdated)).thenReturn(reportUpdated);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/reports/" + reportUpdated.getId())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -188,7 +185,7 @@ class ReportControllerTest {
                 .build();
 
 
-        Mockito.when(reportRepository.findById(report.getId())).thenReturn(Optional.of(report));
+        Mockito.when(controller.getReportById(report.getId())).thenReturn(report);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .delete("/reports/1")

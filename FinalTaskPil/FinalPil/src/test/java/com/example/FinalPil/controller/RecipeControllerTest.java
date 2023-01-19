@@ -33,12 +33,8 @@ public class RecipeControllerTest {
 
     @Autowired
     ObjectMapper mapper;
-
     @MockBean
-    RecipeService recipeService;
-
-    @MockBean
-    RecipeRepository recipeRepository;
+    RecipeController controller;
 
     @Test
     void aNewRecipeShouldBeCreated() throws Exception {
@@ -46,7 +42,7 @@ public class RecipeControllerTest {
                 .recipeName("Pot for aquatic plants")
                 .build();
 
-        when(recipeService.saveRecipe(recipe)).thenReturn(recipe);
+        when(controller.saveRecipe(recipe)).thenReturn(recipe);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/recipes")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -77,7 +73,7 @@ public class RecipeControllerTest {
 
         List<Recipe> records = new ArrayList<>(Arrays.asList(recipe1, recipe2));
 
-        Mockito.when(recipeService.getRecipes()).thenReturn(records);
+        Mockito.when(controller.getRecipes()).thenReturn(records);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/recipes")
@@ -97,7 +93,7 @@ public class RecipeControllerTest {
                 .build();
 
 
-        Mockito.when(recipeService.getRecipeById(recipe1.getId())).thenReturn(recipe1);
+        Mockito.when(controller.getRecipeById(recipe1.getId())).thenReturn(recipe1);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/recipes/" + recipe1.getId())
@@ -116,7 +112,7 @@ public class RecipeControllerTest {
                 .steps("Preheat the oven to 150 degrees and cover the tray with foil.")
                 .build();
 
-        Mockito.when(recipeRepository.findById(recipe1.getId())).thenReturn(Optional.of(recipe1));
+        Mockito.when(controller.getRecipeById(recipe1.getId())).thenReturn(recipe1);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .delete("/recipes/1")
@@ -133,7 +129,7 @@ public class RecipeControllerTest {
                 .steps("Preheat the oven to 150 degrees and cover the tray with foil.")
                 .build();
 
-        Mockito.when(recipeService.findByMaterial(recipe.getMaterial())).thenReturn(recipe);
+        Mockito.when(controller.findByMaterial(recipe.getMaterial())).thenReturn(recipe);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/recipes/material/" + recipe.getMaterial())

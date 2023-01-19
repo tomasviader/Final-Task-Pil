@@ -25,19 +25,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(ZoneController.class)
 class ZoneControllerTest {
 
+    @MockBean
+    ZoneController controller;
+
     @Autowired
     MockMvc mockMvc;
 
     @Autowired
     ObjectMapper mapper;
 
-    @MockBean
-    ZoneService zoneService;
-    
-    @MockBean
-    ZoneRepository zoneRepository;
-    
-    
     @Test
     void aNewZoneShouldBeCreated() throws Exception {
         Zone zone = Zone.builder()
@@ -51,12 +47,13 @@ class ZoneControllerTest {
                 .battery(true)
                 .build();
 
-        when(zoneService.saveZone(zone)).thenReturn(zone);
+        when(controller.saveZone(zone)).thenReturn(zone);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/zones")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(this.mapper.writeValueAsString(zone));
+
 
         mockMvc.perform(mockRequest)
                 .andExpect(status().isOk())
@@ -91,8 +88,8 @@ class ZoneControllerTest {
                 .status(false)
                 .build();
 
-        Mockito.when(zoneRepository.findById(zone_3.getId())).thenReturn(Optional.of(zone_3));
-        Mockito.when(zoneService.modifyZone(updatedZone.getId(),updatedZone)).thenReturn(updatedZone);
+        Mockito.when(controller.getZoneById(zone_3.getId())).thenReturn(zone_3);
+        Mockito.when(controller.modifyZone(updatedZone.getId(),updatedZone)).thenReturn(updatedZone);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/zones/"+ updatedZone.getId())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -120,7 +117,7 @@ class ZoneControllerTest {
                 .build();
 
 
-        Mockito.when(zoneRepository.findById(zone1.getId())).thenReturn(Optional.of(zone1));
+        Mockito.when(controller.getZoneById(zone1.getId())).thenReturn(zone1);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/zones/3")
@@ -156,7 +153,7 @@ class ZoneControllerTest {
 
         List<Zone> records = new ArrayList<>(Arrays.asList(zone1, zone2));
 
-        Mockito.when(zoneService.getZones()).thenReturn(records);
+        Mockito.when(controller.getZones()).thenReturn(records);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/zones")
@@ -180,7 +177,7 @@ class ZoneControllerTest {
                 .build();
 
 
-        Mockito.when(zoneService.getZoneById(zone1.getId())).thenReturn(zone1);
+        Mockito.when(controller.getZoneById(zone1.getId())).thenReturn(zone1);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/zones/" + zone1.getId())
@@ -203,7 +200,7 @@ class ZoneControllerTest {
                 .status(false)
                 .build();
 
-        Mockito.when(zoneService.getZoneByNeighborhood(zone1.getNeighborhood())).thenReturn(zone1);
+        Mockito.when(controller.getZoneByNeighborhood(zone1.getNeighborhood())).thenReturn(zone1);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/zones/neighborhood/" + zone1.getNeighborhood())
@@ -243,9 +240,9 @@ class ZoneControllerTest {
                 .organicWaste(true)
                 .build();
 
-        Mockito.when(zoneService.getZoneById(zone1.getId())).thenReturn(zone1);
-        Mockito.when(zoneService.getZoneById(zone2.getId())).thenReturn(zone2);
-        Mockito.when(zoneService.getDistanceBetweenZonesById(zone1.getId(), zone2.getId())).thenReturn("The distance between Plaza Colon and Plaza España is: 3.0Km.");
+        Mockito.when(controller.getZoneById(zone1.getId())).thenReturn(zone1);
+        Mockito.when(controller.getZoneById(zone2.getId())).thenReturn(zone2);
+        Mockito.when(controller.getDistance(zone1.getId(), zone2.getId())).thenReturn("The distance between Plaza Colon and Plaza España is: 3.0Km.");
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/zones/distance/" + zone1.getId() + "-" + zone2.getId())
