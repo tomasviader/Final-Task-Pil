@@ -20,7 +20,7 @@ public interface ZoneService {
 
     Zone getZoneById(Long id);
 
-    Zone getZoneByNeighborhood(String neighborhood);
+    List<Zone> getZoneByNeighborhood(String neighborhood);
 
     String getDistanceBetweenZonesById(Long idZone1, Long idZone2);
 

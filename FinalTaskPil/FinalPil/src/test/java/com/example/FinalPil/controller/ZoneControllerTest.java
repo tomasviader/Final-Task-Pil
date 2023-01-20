@@ -201,7 +201,9 @@ class ZoneControllerTest {
                 .status(false)
                 .build();
 
-        Mockito.when(controller.getZoneByNeighborhood(zone1.getNeighborhood())).thenReturn(zone1);
+        List<Zone> zones = new ArrayList<>(Arrays.asList(zone1));
+
+        Mockito.when(controller.getZoneByNeighborhood(zone1.getNeighborhood())).thenReturn(zones);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/zones/neighborhood/" + zone1.getNeighborhood())

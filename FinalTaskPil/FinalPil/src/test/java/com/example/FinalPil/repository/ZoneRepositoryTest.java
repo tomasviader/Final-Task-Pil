@@ -1,10 +1,12 @@
 package com.example.FinalPil.repository;
 
+import com.example.FinalPil.model.Capacity;
 import com.example.FinalPil.model.Zone;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,6 +25,7 @@ class ZoneRepositoryTest {
             .longitude(30)
             .neighborhood("Centro")
             .status(true)
+            .capacity(Capacity.EMPTY)
             .build();
     Zone zone2 = Zone.builder()
             .id(2L)
@@ -32,6 +35,7 @@ class ZoneRepositoryTest {
             .longitude(30)
             .neighborhood("General Paz")
             .status(true)
+            .capacity(Capacity.EMPTY)
             .build();
 
 
@@ -92,11 +96,17 @@ class ZoneRepositoryTest {
     @Test
     void weShouldGetByNeighborhood(){
         zoneRepository.save(zone1);
+        zoneRepository.save(zone2);
+
+        ArrayList<Zone> saveZones = new ArrayList<>();
+        saveZones.add(zone1);
+        saveZones.add(zone2);
+
         String neigh = "Centro";
 
-        Zone testZone = zoneRepository.findByNeighborhood(neigh);
+        saveZones.add(zoneRepository.findByNeighborhood(neigh).get(0));
 
-        assertEquals(testZone.getNeighborhood(), zone1.getNeighborhood());
+        assertEquals(saveZones.get(0).getNeighborhood(), zone1.getNeighborhood());
     }
 
 

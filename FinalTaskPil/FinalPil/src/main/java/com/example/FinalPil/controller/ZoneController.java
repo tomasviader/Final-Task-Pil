@@ -57,7 +57,7 @@ public class ZoneController {
     }
 
     @GetMapping("/neighborhood/{neighborhood}")
-    public Zone getZoneByNeighborhood(@PathVariable String neighborhood){
+    public List<Zone> getZoneByNeighborhood(@PathVariable String neighborhood){
         return zoneService.getZoneByNeighborhood(neighborhood);
     }
 

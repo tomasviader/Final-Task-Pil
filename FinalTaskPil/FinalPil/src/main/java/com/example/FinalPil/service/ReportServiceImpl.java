@@ -1,5 +1,6 @@
 package com.example.FinalPil.service;
 
+
 import com.example.FinalPil.model.Report;
 import com.example.FinalPil.model.Supervisor;
 import com.example.FinalPil.model.Zone;
@@ -24,7 +25,7 @@ public class ReportServiceImpl implements ReportService{
     SupervisorService supervisorService;
 
     @Override
-    public Report saveReport(Report report){
+    public Report saveReport(Report report) {
         Zone zone = zoneService.getZoneById(report.getZoneId());
         report.setZoneId(zone.getId());
         Supervisor supervisor = supervisorService.getSupervisorById(report.getSupervisorId());
