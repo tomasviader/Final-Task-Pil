@@ -86,5 +86,24 @@ public class ZoneServiceImpl implements ZoneService {
         return "The distance between " + zone1.getName() + " and " + zone2.getName()
                 + " is: " + result + "Km.";
     }
+
+    @Override
+    public String getFastestFillingZone(Long idZone1, Long idZone2) {
+        Zone zone1 = getZoneById(idZone1);
+        Zone zone2 = getZoneById(idZone2);
+        String zoneOneFaster = zone1.getName() + " is faster to fill than " + zone2.getName() + "";
+        String zoneTwoFaster = zone2.getName() + " is faster to fill than " + zone1.getName() + "";
+        if (zone1.getCapacity().areEmpty(zone2.getCapacity())) {
+            return "At least one zone does not have to be empty";
+        }
+        if (zone1.getCapacity().equals(zone2.getCapacity())){
+            return "The two zones are equally fast";
+        }
+        if (zone1.getCapacity().isFasterThan(zone2.getCapacity())){
+            return zoneOneFaster;
+        } else{
+            return zoneTwoFaster;
+        }
+    }
 }
 

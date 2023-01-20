@@ -24,4 +24,5 @@ public interface ZoneService {
 
     String getDistanceBetweenZonesById(Long idZone1, Long idZone2);
 
+    String getFastestFillingZone(Long id1, Long id2);
 }
