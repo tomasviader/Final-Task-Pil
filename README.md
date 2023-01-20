@@ -1,5 +1,8 @@
 "# Final-Task-Pil"
 
+## *Statement*
+An important commune of our province requests the realization of an application to facilitate the administration of its recycling centers with the participation of the community in general. The main idea is precisely to decentralize the places where one throws the garbage separated by type. A study carried out by ACME suggests that the co-participation of both the state and the general public in terms of the previous treatment of garbage will make it possible to raise awareness among citizens and reduce the amount of waste that is disposed of. It will also have a direct impact on the environment and on the cost of waste treatment.
+
 ## *CLEAN CITY*
 
 ***ZONE CONTROLLER***
@@ -15,8 +18,9 @@ Body:
       "number":1000,
       "latitude":-31.4085704,
       "longitude":-64.1981353,
-      "neighborhood":"Centro",
-      "status": true
+      "neighborhood":"Alberdi",
+      "status": true,
+      "capacity": "EMPTY" 
     } 
 
 **-Create Zone 2**
@@ -31,7 +35,8 @@ Body:
     "latitude":-31.4290925,
     "longitude":-64.18715,
     "neighborhood":"Alberdi",
-    "status": true
+    "status": true,
+    "capacity": "HALFFULL"
     }
 
 **-Modify Zone Information**
@@ -56,6 +61,9 @@ GET **http://localhost:8080/zones/neighborhood/Alberdi**
 **-Get Distance Between Zones By Id**
 GET **http://localhost:8080/zones/distance/1-2**
 
+**-Get Fastest Zone to fill by ID**
+GET **http://localhost:8080/zones/fastest/1-2**
+
 **-Delete Zone**
 DELETE **http://localhost:8080/zones/1**
 
@@ -67,18 +75,8 @@ POST **http://localhost:8080/reports**
 Body:
 
     { 
-    	 "supervisor": {
-    		 "supervisorName": "Guillermo"
-    },  
-    "zone": { 
-    "name": "Plaza Colon",
-    "street":"Avenida Colon",
-    "number":1000,
-    "latitude":-31, 
-    "longitude":-64,
-    "neighborhood":"Alberdi", 
-    "status": true 
-    }, 
+    "supervisorId": 1,
+    "zoneId": 1,
     "capacity":"FULL",
     "needResorting" : true,
     "zoneState": "INACCESSIBLE",
@@ -124,7 +122,7 @@ GET **http://localhost:8080/recipe**
 GET **http://localhost:8080/recipe/1**
 
 **-Get a Recipe by Material**
-GET **http://localhost:8080/recipe/material/glass**
+GET **http://localhost:8080/recipe/material/paper**
 
 **-Delete Recipe**
 DELETE **http://localhost:8080/recipe/1**
@@ -142,7 +140,7 @@ Body:
 
 
 **-Modify Supervisor**
-PUT **http://localhost:8080/supervisors/2**
+PUT **http://localhost:8080/supervisors/1**
 
 Body:
 
@@ -156,7 +154,7 @@ Body:
 GET **http://localhost:8080/supervisors**
 
 **-Get a Supervisor by Id**
-GET **http://localhost:8080/supervisors/2**
+GET **http://localhost:8080/supervisors/1**
 
 **-Delete Supervisor**
-DELETE **http://localhost:8080/supervisors/2**
+DELETE **http://localhost:8080/supervisors/1**
