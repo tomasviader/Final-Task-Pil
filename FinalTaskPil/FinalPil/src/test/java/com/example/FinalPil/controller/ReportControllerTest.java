@@ -51,14 +51,14 @@ class ReportControllerTest {
             .neighborhood("Centro")
             .status(true)
             .battery(true)
+            .capacity(Capacity.HALFFULL)
             .build();
 
     @Test
     void aNewReportShouldBeCreated() throws Exception {
         Report report = Report.builder()
-                .zone(zone)
-                .supervisor(supervisor)
-                .capacity(Capacity.EMPTY)
+                .zoneId(zone.getId())
+                .supervisorId(supervisor.getId())
                 .complaint(Complaint.VANDALISM)
                 .zoneState(ZoneState.INACCESSIBLE)
                 .needResorting(false)
@@ -81,9 +81,8 @@ class ReportControllerTest {
     void weShouldGetAllReports() throws Exception {
         Report report = Report.builder()
                 .id(1L)
-                .supervisor(supervisor)
-                .zone(zone)
-                .capacity(Capacity.EMPTY)
+                .supervisorId(supervisor.getId())
+                .zoneId(zone.getId())
                 .needResorting(false)
                 .zoneState(ZoneState.INACCESSIBLE)
                 .complaint(Complaint.UNUSED_AREA)
@@ -91,9 +90,8 @@ class ReportControllerTest {
 
         Report report2 = Report.builder()
                 .id(2L)
-                .supervisor(supervisor)
-                .zone(zone)
-                .capacity(Capacity.EMPTY)
+                .supervisorId(supervisor.getId())
+                .zoneId(zone.getId())
                 .needResorting(true)
                 .zoneState(ZoneState.IN_MAINTENANCE)
                 .complaint(Complaint.UNUSED_AREA)
@@ -115,9 +113,8 @@ class ReportControllerTest {
     public void weShouldGetAReportById() throws Exception {
         Report report = Report.builder()
                 .id(1L)
-                .supervisor(supervisor)
-                .zone(zone)
-                .capacity(Capacity.EMPTY)
+                .supervisorId(supervisor.getId())
+                .zoneId(zone.getId())
                 .needResorting(false)
                 .zoneState(ZoneState.INACCESSIBLE)
                 .complaint(Complaint.UNUSED_AREA)
@@ -139,9 +136,8 @@ class ReportControllerTest {
 
         Report report = Report.builder()
                 .id(1L)
-                .supervisor(supervisor)
-                .zone(zone)
-                .capacity(Capacity.EMPTY)
+                .supervisorId(supervisor.getId())
+                .zoneId(zone.getId())
                 .needResorting(false)
                 .zoneState(ZoneState.INACCESSIBLE)
                 .complaint(Complaint.UNUSED_AREA)
@@ -149,9 +145,8 @@ class ReportControllerTest {
 
         Report reportUpdated = Report.builder()
                 .id(report.getId())
-                .supervisor(supervisor)
-                .zone(zone)
-                .capacity(Capacity.FULL)
+                .supervisorId(supervisor.getId())
+                .zoneId(zone.getId())
                 .needResorting(true)
                 .zoneState(ZoneState.DAMAGED)
                 .complaint(Complaint.UNUSED_AREA)
@@ -168,7 +163,7 @@ class ReportControllerTest {
         this.mockMvc.perform(mockRequest)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.needResorting", is(true)))
-                .andExpect(jsonPath("$.capacity", is("FULL")));
+                .andExpect(jsonPath("$.zoneState", is("DAMAGED")));
 
     }
 
@@ -176,9 +171,8 @@ class ReportControllerTest {
     void aReportShouldBeDeleted() throws Exception {
         Report report = Report.builder()
                 .id(1L)
-                .supervisor(supervisor)
-                .zone(zone)
-                .capacity(Capacity.EMPTY)
+                .supervisorId(supervisor.getId())
+                .zoneId(zone.getId())
                 .needResorting(false)
                 .zoneState(ZoneState.INACCESSIBLE)
                 .complaint(Complaint.UNUSED_AREA)

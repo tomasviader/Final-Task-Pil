@@ -40,9 +40,8 @@ public class ReportRepositoryTest {
 
     Report report = Report.builder()
             .id(1L)
-            .zone(zone)
-            .supervisor(supervisor2)
-            .capacity(Capacity.EMPTY)
+            .zoneId(zone.getId())
+            .supervisorId(supervisor2.getId())
             .complaint(Complaint.VANDALISM)
             .zoneState(ZoneState.INACCESSIBLE)
             .needResorting(false)
@@ -50,9 +49,8 @@ public class ReportRepositoryTest {
 
     Report report2 = Report.builder()
             .id(2L)
-            .zone(zone)
-            .supervisor(supervisor)
-            .capacity(Capacity.FULL)
+            .zoneId(zone.getId())
+            .supervisorId(supervisor.getId())
             .complaint(Complaint.VANDALISM)
             .zoneState(ZoneState.DAMAGED)
             .needResorting(false)
@@ -68,7 +66,7 @@ public class ReportRepositoryTest {
         saveReports.add(report);
         saveReports.add(report2);
 
-        assertEquals(saveReports.get(1).getZone(), report2.getZone());
+        assertEquals(saveReports.get(1).getZoneId(), report2.getZoneId());
     }
 
     @Test
@@ -78,9 +76,8 @@ public class ReportRepositoryTest {
         boolean newNeedResorting = true;
         Report reportUpdated = Report.builder()
                 .id(1L)
-                .zone(zone)
-                .supervisor(supervisor)
-                .capacity(Capacity.FULL)
+                .zoneId(zone.getId())
+                .supervisorId(supervisor.getId())
                 .complaint(Complaint.VANDALISM)
                 .zoneState(ZoneState.DAMAGED)
                 .needResorting(newNeedResorting)

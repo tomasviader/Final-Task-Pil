@@ -1,6 +1,7 @@
 package com.example.FinalPil.service;
 
 import com.example.FinalPil.model.Report;
+import com.example.FinalPil.model.Supervisor;
 import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.repository.ReportRepository;
 import lombok.AllArgsConstructor;
@@ -18,11 +19,16 @@ public class ReportServiceImpl implements ReportService{
     ReportRepository reportRepository;
     @Autowired
     ZoneService zoneService;
-    
+
+    @Autowired
+    SupervisorService supervisorService;
+
     @Override
     public Report saveReport(Report report){
         Zone zone = zoneService.getZoneById(report.getZoneId());
         report.setZoneId(zone.getId());
+        Supervisor supervisor = supervisorService.getSupervisorById(report.getSupervisorId());
+        report.setSupervisorId(supervisor.getId());
         return reportRepository.save(report);
     }
 
@@ -40,8 +46,9 @@ public class ReportServiceImpl implements ReportService{
     public Report modifyReport(Long id, Report report) {
         Report reportDB = reportRepository.findById(id).get();
 
-        if (Objects.nonNull(report.getSupervisor())){
-            reportDB.setSupervisor(report.getSupervisor());
+        if (Objects.nonNull(report.getSupervisorId())){
+            Supervisor supervisor = supervisorService.getSupervisorById(report.getSupervisorId());
+            reportDB.setSupervisorId(supervisor.getId());
         }
 
         if (Objects.nonNull(report.getZoneId())){

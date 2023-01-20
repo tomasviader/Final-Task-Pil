@@ -19,12 +19,9 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false)
-    private Supervisor supervisor;
+    @Column(nullable = false)
+    private Long supervisorId;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(nullable = false)
     @Column(nullable = false)
     private Long zoneId;
 
