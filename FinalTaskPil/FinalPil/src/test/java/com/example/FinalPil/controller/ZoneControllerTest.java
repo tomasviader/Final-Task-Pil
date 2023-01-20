@@ -1,5 +1,6 @@
 package com.example.FinalPil.controller;
 
+import com.example.FinalPil.model.Capacity;
 import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.repository.ZoneRepository;
 import com.example.FinalPil.service.ZoneService;
@@ -251,7 +252,45 @@ class ZoneControllerTest {
 
     }
 
+    @Test
+    public void weShouldGetTheFastestFillingZone() throws Exception {
+        Zone zone1 = Zone.builder()
+                .id(1L)
+                .name("Plaza España")
+                .street("Avenida Irigoyen")
+                .number(594)
+                .latitude(-31.4290925)
+                .longitude(-64.18715)
+                .neighborhood("Nueva Cordoba")
+                .paper(true)
+                .battery(true)
+                .status(true)
+                .capacity(Capacity.HALFFULL)
+                .build();
 
+        Zone zone2 = Zone.builder()
+                .id(2L)
+                .name("Plaza Colon")
+                .street("Avenida Colon")
+                .number(1000)
+                .latitude(-31.4085704)
+                .longitude(-64.1981353)
+                .neighborhood("Alto Alberdi")
+                .status(true)
+                .battery(true)
+                .organicWaste(true)
+                .capacity(Capacity.FULL)
+                .build();
+
+        Mockito.when(controller.getZoneById(zone1.getId())).thenReturn(zone1);
+        Mockito.when(controller.getZoneById(zone2.getId())).thenReturn(zone2);
+        Mockito.when(controller.getFastestFillingZone(zone1.getId(), zone2.getId())).thenReturn("Plaza Colon is faster to fill than Plaza España");
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/zones/fastest/" + zone1.getId() + "-" + zone2.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }
 
 
