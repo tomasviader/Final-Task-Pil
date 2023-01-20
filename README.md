@@ -15,7 +15,7 @@ Body:
       "number":1000,
       "latitude":-31.4085704,
       "longitude":-64.1981353,
-      "neighborhood":"Alberdi",
+      "neighborhood":"Centro",
       "status": true
     } 
 
@@ -122,6 +122,9 @@ GET **http://localhost:8080/recipe**
 
 **-Get a Recipe by Id**
 GET **http://localhost:8080/recipe/1**
+
+**-Get a Recipe by Material**
+GET **http://localhost:8080/recipe/material/glass**
 
 **-Delete Recipe**
 DELETE **http://localhost:8080/recipe/1**
