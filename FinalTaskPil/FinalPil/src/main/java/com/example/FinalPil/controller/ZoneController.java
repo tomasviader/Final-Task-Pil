@@ -66,5 +66,10 @@ public class ZoneController {
         return zoneService.getDistanceBetweenZonesById(id1, id2);
     }
 
+    @GetMapping("/fastest/{id1}-{id2}")
+    public String getFastestFillingZone(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2){
+        return zoneService.getFastestFillingZone(id1, id2);
+    }
+
 
 }

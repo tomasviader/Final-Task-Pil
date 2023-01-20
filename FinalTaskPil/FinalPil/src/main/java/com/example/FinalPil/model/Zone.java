@@ -52,4 +52,8 @@ public class Zone {
     @Column(nullable = false)
     private boolean nonRecyclableWaste;
 
+    @Enumerated
+    @Column(nullable = false)
+    private Capacity capacity;
+
 }
