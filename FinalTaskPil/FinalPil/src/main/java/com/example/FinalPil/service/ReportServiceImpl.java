@@ -1,6 +1,7 @@
 package com.example.FinalPil.service;
 
 import com.example.FinalPil.model.Report;
+import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.repository.ReportRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,13 @@ public class ReportServiceImpl implements ReportService{
 
     @Autowired
     ReportRepository reportRepository;
-
+    @Autowired
+    ZoneService zoneService;
+    
     @Override
     public Report saveReport(Report report){
+        Zone zone = zoneService.getZoneById(report.getZoneId());
+        report.setZoneId(zone.getId());
         return reportRepository.save(report);
     }
 
@@ -39,12 +44,9 @@ public class ReportServiceImpl implements ReportService{
             reportDB.setSupervisor(report.getSupervisor());
         }
 
-        if (Objects.nonNull(report.getZone())){
-            reportDB.setZone(report.getZone());
-        }
-
-        if (Objects.nonNull(report.getCapacity())){
-            reportDB.setCapacity(report.getCapacity());
+        if (Objects.nonNull(report.getZoneId())){
+            Zone zone = zoneService.getZoneById(report.getZoneId());
+            reportDB.setZoneId(zone.getId());
         }
 
         if (Objects.nonNull(report.isNeedResorting())){

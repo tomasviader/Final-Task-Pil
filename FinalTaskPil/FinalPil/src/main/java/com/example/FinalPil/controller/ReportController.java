@@ -2,7 +2,9 @@ package com.example.FinalPil.controller;
 
 import com.example.FinalPil.model.Report;
 import com.example.FinalPil.model.Supervisor;
+import com.example.FinalPil.repository.ZoneRepository;
 import com.example.FinalPil.service.ReportService;
+import com.example.FinalPil.service.ZoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ public class ReportController {
 
     @Autowired
     ReportService reportService;
+
     @PostMapping
     public Report saveReport(@RequestBody Report report){
         return reportService.saveReport(report);

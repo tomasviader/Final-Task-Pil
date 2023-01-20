@@ -23,13 +23,10 @@ public class Report {
     @JoinColumn(nullable = false)
     private Supervisor supervisor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false)
-    private Zone zone;
-
-    @Enumerated(EnumType.STRING)
-    @Column(length = 8)
-    private Capacity capacity;
+    //@ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(nullable = false)
+    @Column(nullable = false)
+    private Long zoneId;
 
     @Column(nullable = false)
     private boolean needResorting;
