@@ -64,7 +64,7 @@ public class ZoneServiceImpl implements ZoneService {
     }
 
     @Override
-    public Zone getZoneByNeighborhood(String neighborhood){
+    public List<Zone> getZoneByNeighborhood(String neighborhood){
         return zoneRepository.findByNeighborhood(neighborhood);
     }
 

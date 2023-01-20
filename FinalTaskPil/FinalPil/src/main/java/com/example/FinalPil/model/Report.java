@@ -19,17 +19,11 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false)
-    private Supervisor supervisor;
+    @Column(nullable = false)
+    private Long supervisorId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false)
-    private Zone zone;
-
-    @Enumerated(EnumType.STRING)
-    @Column(length = 8)
-    private Capacity capacity;
+    @Column(nullable = false)
+    private Long zoneId;
 
     @Column(nullable = false)
     private boolean needResorting;
