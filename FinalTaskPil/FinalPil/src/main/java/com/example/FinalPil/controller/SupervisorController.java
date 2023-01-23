@@ -1,7 +1,6 @@
 package com.example.FinalPil.controller;
 
 import com.example.FinalPil.model.Supervisor;
-import com.example.FinalPil.model.Zone;
 import com.example.FinalPil.service.SupervisorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

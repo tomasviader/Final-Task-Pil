@@ -1,7 +1,6 @@
 package com.example.FinalPil.repository;
 
 import com.example.FinalPil.model.Supervisor;
-import com.example.FinalPil.model.Zone;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

@@ -2,8 +2,6 @@ package com.example.FinalPil.service;
 
 import com.example.FinalPil.controller.ReportController;
 import com.example.FinalPil.model.*;
-import com.example.FinalPil.repository.ReportRepository;
-import com.example.FinalPil.service.ReportService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -18,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;

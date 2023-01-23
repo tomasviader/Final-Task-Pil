@@ -1,9 +1,6 @@
 package com.example.FinalPil.controller;
 
 import com.example.FinalPil.model.Recipe;
-import com.example.FinalPil.model.Zone;
-import com.example.FinalPil.repository.RecipeRepository;
-import com.example.FinalPil.service.RecipeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -18,7 +15,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
