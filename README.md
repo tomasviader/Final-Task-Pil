@@ -1,5 +1,3 @@
-"# Final-Task-Pil"
-
 ## *Statement*
 An important commune of our province requests the realization of an application to facilitate the administration of its recycling centers with the participation of the community in general. The main idea is precisely to decentralize the places where one throws the garbage separated by type. A study carried out by ACME suggests that the co-participation of both the state and the general public in terms of the previous treatment of garbage will make it possible to raise awareness among citizens and reduce the amount of waste that is disposed of. It will also have a direct impact on the environment and on the cost of waste treatment.
 
