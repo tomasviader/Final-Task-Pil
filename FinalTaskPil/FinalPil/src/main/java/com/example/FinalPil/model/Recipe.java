@@ -1,34 +1,29 @@
-package model;
+package com.example.FinalPil.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "\"Zone\"")
+@Table(name = "\"Recipes\"")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Zone {
-
+@AllArgsConstructor
+@Builder
+public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(unique = true, nullable = false)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String recipeName;
 
     @Column(nullable = false)
-    private String street;
-
-    @Column(length = 8)
-    private int number;
+    private String material;
 
     @Column(nullable = false)
-    private String coordinates;
-    //clasificacion falta saber como vamos a implentar (enum, etc)
-
+    private String steps;
 }
