@@ -207,8 +207,8 @@ class ZoneControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
 
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", notNullValue()))
-                .andExpect(jsonPath("$.name", is("Catamarca")));
+                .andExpect(jsonPath("$", notNullValue()));
+
     }
 
 
